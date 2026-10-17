@@ -161,6 +161,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
   </tbody>
 </table></div>
 <p class="small"><b>Original pitch, shown for comparison:</b> descend the ocean dungeon with a cutlass, harpoon and trident to defeat the molten dragon and found a kingdom.</p>
+
+<h3 id="design-space">Where the games sit in design space</h3>
+<figure>
+  <div id="fig-map" class="chart"></div>
+  <div class="legend" id="map-legend"></div>
+  <figcaption>All 250 games, grouped by similarity across 148 design traits. Nearby points suggest similar designs; position is not a ranking. Diamonds mark our ideas. Larger circles mean more reviews (sales-based equivalents for console games); darker blue means more reviews relative to the year, budget and licence baseline. Grey marks console games. Hover or focus a point for details.</figcaption>
+</figure>
 </section>
 
 <section aria-labelledby="method">
@@ -259,11 +266,54 @@ function renderIdeas() {
     hover(p, info); hover(f, info);
   });
 }
-renderIdeas();
+const games = D.games;
+const adjVals = games.filter(g => g.adj_pop != null).map(g => g.adj_pop).sort((a, b) => a - b);
+const qcut = [1, 2, 3, 4, 5].map(i => adjVals[Math.floor(i * adjVals.length / 6)]);
+const logs = games.map(g => Math.log10(g.popularity_reviews)), lmin = Math.min(...logs), lmax = Math.max(...logs);
+const radius = g => 2.6 + 7.5 * Math.sqrt((Math.log10(g.popularity_reviews) - lmin) / (lmax - lmin));
+const fmt = n => n == null ? "Unknown" : n >= 1e6 ? (n / 1e6).toFixed(1) + "M" : n >= 1e4 ? Math.round(n / 1e3) + "k" : n >= 1e3 ? (n / 1e3).toFixed(1) + "k" : String(Math.round(n));
+const clusterName = id => (D.clusters.find(c => c.id === id) || {}).name || "";
+function renderMap() {
+  const host = $("#fig-map"), W = Math.max(300, host.clientWidth), H = Math.round(Math.max(320, Math.min(560, W * 0.62)));
+  host.innerHTML = "";
+  const svg = sv("svg", { viewBox: `0 0 ${W} ${H}`, width: W, height: H, role: "img", "aria-label": "Map of 250 games by design similarity, with the new ideas" }, host);
+  const all = games.map(g => [g.x, g.y]).concat(D.concepts.map(c => [c.x, c.y]));
+  const xs = all.map(p => p[0]), ys = all.map(p => p[1]), pad = 26;
+  const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+  const sx = v => pad + (v - x0) / (x1 - x0) * (W - 2 * pad), sy = v => pad + (v - y0) / (y1 - y0) * (H - 2 * pad);
+  const pts = [];
+  games.slice().sort((a, b) => radius(b) - radius(a)).forEach(g => {
+    const b = g.adj_pop == null ? -1 : qcut.filter(c => g.adj_pop >= c).length;
+    const p = sv("circle", { cx: sx(g.x), cy: sy(g.y), r: radius(g), fill: b < 0 ? "var(--dot-dim)" : `var(--q${b + 1})`, stroke: "var(--halo)", "stroke-width": 1.3, tabindex: 0, "aria-label": g.name }, svg);
+    const html = `<b>${esc(g.name)}</b> (${g.year})<br>${g.platform === "console" ? "~" + fmt(g.est_sales) + " copies sold" : fmt(g.reviews) + " observed reviews"}<br><span class="muted">${esc(clusterName(g.cluster))}</span>`;
+    hover(p, html);
+    pts.push({ x: sx(g.x), y: sy(g.y), r: radius(g), html });
+  });
+  D.concepts.forEach(c => {
+    const cx = sx(c.x), cy = sy(c.y), deep = c.key === DEEP, base = isBase(c.key), s = deep ? 10 : 7;
+    const name = base ? "Team pitch (as written)" : c.name;
+    const p = sv("path", { d: `M${cx} ${cy - s}L${cx + s} ${cy}L${cx} ${cy + s}L${cx - s} ${cy}Z`, fill: base ? "var(--panel)" : deep ? "var(--hl)" : "var(--s2)", stroke: base ? "var(--s2)" : "var(--halo)", "stroke-width": base ? 2 : 1.5, tabindex: 0, "aria-label": name }, svg);
+    if (deep || base) txt(svg, cx + s + 4, cy + 4, name, { "font-size": W < 500 ? 10 : 12, "font-weight": deep ? 700 : 500, fill: "var(--ink)", stroke: "var(--halo)", "stroke-width": 3.5, "paint-order": "stroke", "pointer-events": "none" });
+    const model = S.concepts.find(item => item.key === c.key);
+    const html = `<b>${esc(name)}</b><br>Idea score: ${number(model.pos)}<br>Relative comparison score, not a review forecast.`;
+    hover(p, html);
+    pts.push({ x: cx, y: cy, r: s + 2, html });
+  });
+  svg.addEventListener("pointermove", e => {
+    const r = svg.getBoundingClientRect(), mx = (e.clientX - r.left) * W / r.width, my = (e.clientY - r.top) * H / r.height;
+    let best = null, bd = Infinity;
+    pts.forEach(p => { const d = Math.hypot(p.x - mx, p.y - my) - p.r; if (d < bd) { bd = d; best = p; } });
+    if (best && bd <= 12) showTip(best.html, e.clientX, e.clientY); else tip.hidden = true;
+  });
+  svg.addEventListener("pointerleave", () => { tip.hidden = true; });
+  $("#map-legend").innerHTML = `<span class="key">Fewer <span class="ramp">${[1, 2, 3, 4, 5, 6].map(i => `<span style="background:var(--q${i})"></span>`).join("")}</span> more reviews relative to baseline</span><span class="key"><svg width="14" height="14" aria-hidden="true"><path d="M7 1L13 7L7 13L1 7Z" fill="var(--hl)"/></svg>Deep-sea heat metroidvania</span><span class="key"><svg width="14" height="14" aria-hidden="true"><path d="M7 1L13 7L7 13L1 7Z" fill="var(--s2)"/></svg>Other new ideas</span><span class="key"><svg width="14" height="14" aria-hidden="true"><path d="M7 1L13 7L7 13L1 7Z" fill="var(--panel)" stroke="var(--s2)" stroke-width="2"/></svg>Original pitch</span>`;
+}
+function renderAll() { renderIdeas(); renderMap(); }
+renderAll();
 let resizeTimer, lastW = window.innerWidth;
 window.addEventListener("resize", () => {
   if (Math.abs(window.innerWidth - lastW) < 8) return;
-  lastW = window.innerWidth; clearTimeout(resizeTimer); resizeTimer = setTimeout(renderIdeas, 150);
+  lastW = window.innerWidth; clearTimeout(resizeTimer); resizeTimer = setTimeout(renderAll, 150);
 });
 })();
 </script>
