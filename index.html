@@ -3,13 +3,10 @@
 <body>
 <title>The Metroidvania Gap</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <style>
-/* Layout: a research paper read like a metroidvania map. A sticky table of contents on the left is drawn
-   as connected rooms, coloured by the paper's four regions (data, method, results, proposals); serif prose
-   in a 70ch column; figures break out to the full content width. */
+/* Layout: a light, plain research paper. A sticky table of contents on the left is drawn as connected
+   rooms, coloured by the paper's four regions; prose in a 70ch column; figures break out to full width.
+   One system font throughout; all text is black or grey, colour is kept for charts and markers. */
 :root {
   --paper: #fafbfd; --panel: #ffffff; --ink: #131a27; --ink2: #465063; --muted: #687184;
   --rule: #dde2ea; --grid: #e7ebf1; --grid-strong: #cdd4de; --wash: #edf3fc;
@@ -19,33 +16,12 @@
   --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --dot: #a3abb8; --dot-dim: #d9dee6;
   --pos: #2a78d6; --neg: #e34948; --halo: #ffffff;
   --q1: #cde2fb; --q2: #9ec5f4; --q3: #6da7ec; --q4: #3987e5; --q5: #256abf; --q6: #184f95;
-  --font-display: "Chakra Petch", "Segoe UI", system-ui, sans-serif;
-  --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
-  --font-ui: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
   --radius: 6px;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #0d1118; --panel: #151b26; --ink: #eef1f6; --ink2: #b9c1cf; --muted: #8a93a3;
-    --rule: #263043; --grid: #1b2331; --grid-strong: #2b3547; --wash: #14223a;
-    --accent: #e46b9d; --accent-soft: #3a1d2b;
-    --r-data: #3987e5; --r-method: #9085e9; --r-results: #199e70; --r-ideas: #d95926; --r-votive: #e46b9d;
-    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --dot: #5f697c; --dot-dim: #2a3343;
-    --pos: #3987e5; --neg: #e66767; --halo: #151b26;
-    --q1: #1b2f4d; --q2: #1c4a86; --q3: #2a6cc0; --q4: #4f91e3; --q5: #86b6ef; --q6: #c4dbf8;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --paper: #0d1118; --panel: #151b26; --ink: #eef1f6; --ink2: #b9c1cf; --muted: #8a93a3;
-  --rule: #263043; --grid: #1b2331; --grid-strong: #2b3547; --wash: #14223a;
-  --accent: #e46b9d; --accent-soft: #3a1d2b;
-  --r-data: #3987e5; --r-method: #9085e9; --r-results: #199e70; --r-ideas: #d95926; --r-votive: #e46b9d;
-  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --dot: #5f697c; --dot-dim: #2a3343;
-  --pos: #3987e5; --neg: #e66767; --halo: #151b26;
-  --q1: #1b2f4d; --q2: #1c4a86; --q3: #2a6cc0; --q4: #4f91e3; --q5: #86b6ef; --q6: #c4dbf8;
-  color-scheme: dark;
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.65; }
@@ -54,11 +30,11 @@ body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(
 article { min-width: 0; max-width: 1000px; }
 p, li { max-width: 70ch; }
 p { margin: 0 0 1em; }
-a { color: var(--accent); text-underline-offset: 2px; }
+a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
 h1, h2, h3 { text-wrap: balance; margin: 0; }
 h2 { font-family: var(--font-ui); font-size: 1.55rem; font-weight: 600; line-height: 1.2; display: flex; align-items: center; gap: 12px; margin: 56px 0 16px; scroll-margin-top: 24px; }
 h3 { font-family: var(--font-ui); font-size: 1.12rem; font-weight: 600; margin: 32px 0 10px; scroll-margin-top: 24px; }
-.room { width: 30px; height: 30px; border-radius: 4px; display: inline-grid; place-items: center; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 500; color: var(--panel); background: var(--c, var(--ink2)); flex: none; }
+.room { width: 30px; height: 30px; border-radius: 4px; display: inline-grid; place-items: center; font-size: 0.85rem; font-weight: 600; color: var(--ink); background: var(--grid); border-left: 4px solid var(--c, var(--ink2)); flex: none; }
 .r-data { --c: var(--r-data); } .r-method { --c: var(--r-method); } .r-results { --c: var(--r-results); } .r-ideas { --c: var(--r-ideas); } .r-votive { --c: var(--r-votive); }
 a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
@@ -66,16 +42,15 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 header.paper-head { padding-block: 48px 8px; display: grid; gap: 14px; max-width: 1000px; }
 .kicker { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 h1 { font-family: var(--font-display); font-size: clamp(2.3rem, 5.5vw, 3.6rem); font-weight: 700; line-height: 1.02; letter-spacing: 0.005em; }
-h1 .tint { color: var(--accent); }
-.subtitle { font-size: 1.25rem; color: var(--ink2); max-width: 60ch; margin: 0; font-style: italic; }
+.subtitle { font-size: 1.2rem; color: var(--ink2); max-width: 60ch; margin: 0; }
 .byline { font-family: var(--font-ui); font-size: 0.9rem; color: var(--ink2); display: flex; flex-wrap: wrap; gap: 6px 20px; }
 .byline b { color: var(--ink); font-weight: 600; }
 .abstract { background: var(--wash); border-radius: var(--radius); padding: 22px 26px; margin: 26px 0 8px; }
-.abstract h2 { margin: 0 0 8px; font-size: 0.8rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; color: var(--r-data); }
+.abstract h2 { margin: 0 0 8px; font-size: 0.8rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink2); }
 .abstract p { margin: 0; max-width: 78ch; }
 .results-list { list-style: none; padding: 0; margin: 20px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px 22px; }
 .results-list li { font-family: var(--font-ui); font-size: 0.92rem; color: var(--ink2); display: grid; gap: 2px; }
-.results-list b { font-family: var(--font-display); font-size: 1.7rem; line-height: 1.1; color: var(--c); font-weight: 600; }
+.results-list b { font-size: 1.6rem; line-height: 1.1; color: var(--ink); font-weight: 650; }
 
 /* TOC as a map */
 nav.toc { font-family: var(--font-ui); font-size: 0.86rem; }
@@ -96,7 +71,7 @@ nav.toc .legend i { width: 10px; height: 10px; border-radius: 2px; background: v
 /* Figures */
 figure { margin: 28px 0 32px; background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius); padding: 16px; min-width: 0; }
 figcaption { font-family: var(--font-ui); font-size: 0.88rem; color: var(--ink2); margin-top: 10px; max-width: 90ch; line-height: 1.5; }
-figcaption b.fig { color: var(--c, var(--ink)); }
+figcaption b.fig { color: var(--ink); }
 .chart { width: 100%; min-width: 0; }
 .chart svg { display: block; overflow: visible; }
 .scroll-x { overflow-x: auto; min-width: 0; }
@@ -106,7 +81,7 @@ select, input[type="search"] { font: inherit; font-family: var(--font-ui); font-
 input[type="search"] { width: 220px; min-width: 0; }
 .btn { font-family: var(--font-ui); font-size: 0.85rem; border: 1px solid var(--grid-strong); background: var(--panel); color: var(--ink); border-radius: var(--radius); padding: 6px 12px; cursor: pointer; }
 .btn:hover { border-color: var(--accent); }
-.btn.on { background: var(--accent); border-color: var(--accent); color: var(--panel); }
+.btn.on { background: var(--wash); border-color: var(--ink2); color: var(--ink); }
 .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-family: var(--font-ui); font-size: 0.8rem; color: var(--ink2); align-items: center; }
 .key { display: inline-flex; gap: 6px; align-items: center; }
 .swatch { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
@@ -120,7 +95,7 @@ input[type="search"] { width: 220px; min-width: 0; }
 .kv { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 3px 10px; }
 .kv dt { color: var(--muted); }
 .kv dd { margin: 0; min-width: 0; }
-.linklike { background: none; border: 0; color: var(--accent); padding: 0; text-decoration: underline; font: inherit; cursor: pointer; }
+.linklike { background: none; border: 0; color: var(--ink); padding: 0; text-decoration: underline; font: inherit; cursor: pointer; }
 #tip { position: fixed; z-index: 50; pointer-events: none; background: var(--panel); color: var(--ink); border: 1px solid var(--grid-strong); border-radius: var(--radius); padding: 8px 10px; font-family: var(--font-ui); font-size: 0.82rem; max-width: 300px; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18); line-height: 1.45; }
 .two-up { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
 @media (max-width: 860px) { .two-up { grid-template-columns: minmax(0, 1fr); } }
@@ -138,7 +113,7 @@ tr.hl td { background: var(--accent-soft); }
 tr.rowlink { cursor: pointer; }
 tr.rowlink:hover td { background: var(--wash); }
 .table-caption { font-family: var(--font-ui); font-size: 0.88rem; color: var(--ink2); margin: 0 0 8px; }
-.table-caption b { color: var(--c, var(--ink)); }
+.table-caption b { color: var(--ink); }
 
 /* Equations */
 .eq { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px; margin: 14px 0 18px; padding: 12px 16px; background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius); overflow-x: auto; }
@@ -157,7 +132,7 @@ textarea#csv-fallback { width: 100%; height: 140px; font-family: var(--font-mono
 .brief-grid h5 { margin: 0 0 4px; font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 500; }
 .brief-grid p, .brief-grid ol { margin: 0; }
 .brief-grid ol { padding-left: 1.2em; }
-.tagline { font-family: var(--font-display); font-size: 1.5rem; color: var(--r-votive); line-height: 1.2; margin: 4px 0 12px; }
+.tagline { font-size: 1.4rem; font-weight: 600; color: var(--ink); line-height: 1.25; margin: 4px 0 12px; }
 .vision { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 24px; align-items: start; }
 @media (max-width: 760px) { .vision { grid-template-columns: minmax(0, 1fr); } }
 figure.sketch { margin: 0; padding: 10px; }
@@ -673,7 +648,7 @@ function renderMap() {
     sv("path", { d: `M${cx} ${cy - s}L${cx + s} ${cy}L${cx} ${cy + s}L${cx - s} ${cy}Z`, fill: base ? "var(--panel)" : cf, stroke: base ? "var(--s2)" : "var(--halo)", "stroke-width": base ? 2.2 : 1.5 }, svg);
     if (MAP.selected && MAP.selected.kind === "concept" && MAP.selected.key === c.key) sv("circle", { cx, cy, r: s + 5, fill: "none", stroke: "var(--ink)", "stroke-width": 2 }, svg);
     const name = base ? shortName(c.key) : top ? "Votive (top-ranked)" : c.name.replace(": Night Parade", "");
-    txt(svg, cx + s + 4, cy + 4, name, { "font-size": top || th ? 13 : 11.5, "font-weight": 600, fill: th ? "var(--r-votive)" : "var(--ink)", stroke: "var(--halo)", "stroke-width": 3.5, "paint-order": "stroke" });
+    txt(svg, cx + s + 4, cy + 4, name, { "font-size": top || th ? 13 : 11.5, "font-weight": 600, fill: "var(--ink)", stroke: "var(--halo)", "stroke-width": 3.5, "paint-order": "stroke" });
     mapPoints.push({ kind: "concept", key: c.key, x: cx, y: cy, r: s + 2 });
   });
   const nearest = (mx, my) => { let best = null, bd = 1e9; for (const p of mapPoints) { const d = Math.hypot(p.x - mx, p.y - my) - p.r; if (d < bd) { bd = d; best = p; } } return bd <= 14 ? best : null; };
@@ -883,7 +858,7 @@ function renderIntervals() {
   CONCEPTS.forEach((s, i) => {
     const y = m.t + i * rowH + (narrow ? 26 : 14), th = s.key === "concept:thermocline", base = isBase(s.key);
     const name = shortName(s.key), col = th ? "var(--r-votive)" : base ? "var(--dot)" : "var(--s2)";
-    if (narrow) txt(svg, 0, y - 14, name, { "font-size": 12, fill: "var(--ink)", "font-weight": 600 }); else txt(svg, lw, y + 4, name, { "font-size": 12.5, fill: th ? "var(--r-votive)" : "var(--ink)", "text-anchor": "end", "font-weight": 600 });
+    if (narrow) txt(svg, 0, y - 14, name, { "font-size": 12, fill: "var(--ink)", "font-weight": 600 }); else txt(svg, lw, y + 4, name, { "font-size": 12.5, fill: "var(--ink)", "text-anchor": "end", "font-weight": th ? 700 : 500 });
     sv("line", { x1: X(s.pos_lo), x2: X(s.pos_hi), y1: y, y2: y, stroke: col, "stroke-width": 2.4, opacity: 0.45, "stroke-linecap": "round" }, svg);
     sv("circle", { cx: X(s.pos), cy: y, r: 6, fill: "var(--panel)", stroke: col, "stroke-width": 2.2 }, svg);
     const d = sv("circle", { cx: X(s.full), cy: y, r: 6, fill: col, stroke: "var(--halo)", "stroke-width": 1.5, tabindex: 0 }, svg);
