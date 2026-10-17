@@ -6,6 +6,8 @@ An interactive research paper that maps 250 popular metroidvanias and close rela
 
 The 17 October 2026 revision gives every core swim move a heat attack, introduces pulling vents and pushing current generators, and separates world pressure valves from reusable player abilities. It includes the design tradeoffs and a recomputed ranking: 3rd of seven developed concepts, unchanged because the model's broad feature annotations are unchanged.
 
+Concept comparisons show relative ranks and bootstrap rank stability, rather than review-count forecasts. The model was trained on a selected set of popular games and cannot estimate a new release's expected reviews or its chance of becoming a hit.
+
 ## Contents
 
 - `index.html`: the paper, self-contained (charts, data and sketch are embedded)

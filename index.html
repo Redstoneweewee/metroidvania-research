@@ -75,7 +75,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 </header>
 
 <section class="summary" aria-label="Summary">
-  <p>We scored 250 popular metroidvanias and close relatives on design traits from the ECE&nbsp;184 framework and measured their association with Steam reviews. Movement, discovery and melancholy are promising traits in this sample. We used those findings to rebuild the team's ocean pitch as a <b>deep-sea heat metroidvania</b>: every swim move can hurt enemies, hot vents pull you toward a timed rebound, and cool generators push you along new routes. On the idea alone it ranks at the <span data-bind="thermo_c.positioning_pctile" data-fmt="ord"></span> percentile relative to observed reviews in this selected sample, up from the <span data-bind="heat_c.positioning_pctile" data-fmt="ord"></span> for the original pitch. The latest movement revision improves the design's specificity without changing the model's broad feature scores.</p>
+  <p>We scored 250 popular metroidvanias and close relatives on design traits from the ECE&nbsp;184 framework and measured their association with Steam reviews. Movement, discovery and melancholy are promising traits in this sample. We used those findings to rebuild the team's ocean pitch as a <b>deep-sea heat metroidvania</b>: every swim move can hurt enemies, hot vents pull you toward a timed rebound, and cool generators push you along new routes. It ranks <span data-bind="deep_rank" data-fmt="ord"></span> among seven developed concepts in this exploratory comparison. The model was trained on selected popular games; it does not estimate expected reviews or the chance of joining that group. The latest movement revision improves the design's specificity without changing the model's broad feature scores.</p>
 </section>
 
 <section aria-labelledby="pitch">
@@ -87,7 +87,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 
 <h3>Why prototype it</h3>
 <ul>
-  <li><b>A promising position in this dataset.</b> The idea scores at the <span data-bind="thermo_c.positioning_pctile" data-fmt="ord"></span> percentile relative to the observed reviews of 243 Steam games in our selected sample, and the <span data-bind="thermo_c.pred_pctile" data-fmt="ord"></span> if built as planned. This is a model comparison, not a forecast of player reception.</li>
+  <li><b>A candidate worth comparing.</b> The idea ranks <span data-bind="deep_rank" data-fmt="ord"></span> among seven developed concepts using a model trained on selected popular games. That supports a prototype comparison; it does not establish expected reviews or a probability of success.</li>
   <li><b>One skill connects traversal and combat.</b> Learning to steer, time a kick and read a current also teaches you to fight. Movement remains the core action, with no separate weapon system.</li>
   <li><b>A clear visual hook.</b> A tiny diver draws hot horizontal and vertical lines through dark water, rebounds from a glowing intake and disappears into a cold current.</li>
   <li><b>A bounded production target.</b> Four core moves, four reusable upgrades, two environmental force types and shared heat effects. The 3-4 hour, roughly 70-room plan for 13 engineers and 1-2 artists over three quarters is a target to validate after the prototype.</li>
@@ -166,21 +166,23 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 
 <section aria-labelledby="compare">
 <h2 id="compare">2. How it compares with the other ideas</h2>
-<p>We wrote six new ideas aimed at gaps in the market, built the deep-sea game from the team's pitch, and scored the team's original pitch as written for comparison. Each idea gets two scores, both expressed by comparing each prediction with observed review totals for the 243 Steam games in the selected sample:</p>
+<p>We wrote six new ideas aimed at gaps in the market, built the deep-sea game from the team's pitch, and scored the original pitch as a baseline. The chart compares these eight entries by model rank: 1 is the highest score. It describes how the model orders the ideas, not their expected commercial results.</p>
+<p class="callout"><b>Selected popular games only.</b> The review model learned from 243 Steam games in our 250-game research sample. Games that attracted few players are largely missing. This selection bias means the model cannot estimate a new game's expected reviews, sales or probability of becoming a hit. Even the relative rankings are exploratory; changing the axis does not remove that bias.</p>
 <ul>
-  <li><b>Idea score</b> rates the concept itself: its genre, theme, tone, art and structure.</li>
-  <li><b>If built as planned</b> also assumes the world, secrets and story are as well made as the pitch promises. It's a best case, not a forecast.</li>
+  <li><b>Idea rank</b> compares concepts with execution-quality traits held at the selected sample's median.</li>
+  <li><b>Pitch-assumption rank</b> also uses the execution-quality ratings claimed in each pitch. This is an assumption-sensitive comparison, not a forecast or a validated best case.</li>
 </ul>
 <figure>
   <div id="fig-ideas" class="chart"></div>
-  <figcaption><b>Figure 1.</b> Predicted Steam reviews for each idea. Hollow dot and bar: idea score with its 90% range. Filled dot: if built as planned. Lines mark the median and the top-10% game in our set. The ranges are wide, so read this as a ranking, not a sales forecast.</figcaption>
+  <div class="legend"><span class="key"><span class="swatch" style="background:transparent;border:2px solid var(--s2)"></span>Idea rank</span><span class="key"><span class="swatch" style="background:var(--s2)"></span>Pitch-assumption rank</span></div>
+  <figcaption><b>Figure 1.</b> Exploratory ranks among seven developed concepts and the original pitch. Hollow dots show idea ranks; bars span the 5th to 95th percentiles of those ranks across 200 bootstrap refits. Filled dots show ranks under the pitch's execution assumptions. The two dots are offset vertically so equal ranks remain visible. Resampling measures sensitivity within the selected sample; it does not account for omitted low-review games or establish success probabilities. These bars are rank-stability ranges, not review forecasts.</figcaption>
 </figure>
 <div class="scroll-x"><table id="tbl-ideas"></table></div>
 <p style="margin-top:12px">The gothic moth platformer, whose light-and-heat core the deep-sea game builds on, ranks first in <span data-bind="votive.p_rank1" data-fmt="pct"></span> of 200 re-runs on resampled data. The deep-sea game makes the top three in <span data-bind="thermo.p_top3" data-fmt="pct"></span> and is the only top idea built from the team's own pitch.</p>
 <h3 id="revision-ranking">Re-ranking after the movement revision</h3>
 <p id="revision-rank"></p>
 <p><b>Why the numeric score does not rise.</b> The revised pitch still encodes movement as the primary verb, combat emphasis at 2/3, traversal and exploration at 3/3, ability/knowledge/item gating at 3/0/1, and emergence at 2/3. Learning rebound timing is mastery, not automatically knowledge-gated progression. Relabelling valves as world objects does not remove item-like gates. The model does not encode attack geometry, suction, rebound responsiveness or enemy readability, and a longer list of damage sources does not establish stronger emergence. The feature vector is unchanged; the prose has become more precise. The same data, seeds and models therefore give the same score.</p>
-<p><b>Design judgment:</b> I prefer this revision to the dash-only version because it offers more purposeful positions and gives progression a clearer structure. That is a provisional improvement in the design, not evidence for a higher market percentile. I would prototype it first for this team's constraints, while retaining the statistical order of the competing concepts. Passive damage, force readability and production scope remain the main risks.</p>
+<p><b>Design judgment:</b> I prefer this revision to the dash-only version because it offers more purposeful positions and gives progression a clearer structure. That is a provisional improvement in the design, not evidence of greater commercial success. I would prototype it first for this team's constraints, while retaining the model's exploratory order of the competing concepts. Passive damage, force readability and production scope remain the main risks.</p>
 </section>
 
 <section aria-labelledby="popular">
@@ -205,14 +207,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 <section aria-labelledby="method">
 <h2 id="method">4. How we calculated it</h2>
 <p>We selected 250 metroidvanias and close relatives: 243 Steam games and seven console classics such as Super Metroid. We described each on 148 design traits from the course framework: core action, enemy theme, story theme, setting, art style, tone, pacing, audience and mechanics such as difficulty and hidden lore.</p>
-<p>Popularity is the number of Steam reviews, adjusted so older games and big-budget or licensed games don't get an unfair edge. Two models learned which traits go with more reviews: a regression and a random forest, averaged together. Tested on games they hadn't seen, they explain about <span data-bind="stats.metrics.r2" data-fmt="pct"></span> of the differences between games: good enough to rank ideas, not to predict sales.</p>
+<p>The underlying target is the number of Steam reviews, with release year, budget and licensed IP included as controls. Two models, a regression and a random forest, are averaged together. Held-out tests within the same selected sample explain about <span data-bind="stats.metrics.r2" data-fmt="pct"></span> of variation in log review counts. That does not validate predictions for a typical new release. We use their scores only to make an exploratory ordering of the concepts.</p>
+<p>The chart's rank ranges come from refitting both models on 200 resamples of the selected Steam games and ranking all eight entries each time. They describe the sensitivity of the idea ranking to those games. The comparison keeps the original scores and ordering; review-count estimates and their apparent forecast intervals are no longer plotted. A commercial forecast would require representative releases including low-review games, additional launch and marketing factors, and validation on later releases.</p>
 <p>To find gaps, we looked for trait combinations that appear far less often than chance would predict, and "bred" <span data-bind="meta.n_candidates" data-fmt="int"></span> new combinations from well-liked games. The best gaps became the ideas in Section&nbsp;2, which were scored by the same models.</p>
 </section>
 
 <section aria-labelledby="limits">
 <h2 id="limits">5. Limits</h2>
 <ul>
-  <li>We studied games that already succeeded, so the results show what hits have in common, not what guarantees one.</li>
+  <li>The sample was selected for popularity. It cannot establish expected results for typical releases or the probability of reaching the top group. Cross-validation and bootstrap refits within this sample do not correct that selection bias.</li>
   <li>Design traits were scored by judgment; another designer would score some games differently.</li>
   <li>Reviews measure players, not revenue, and marketing, polish and timing are outside the model.</li>
 </ul>
@@ -262,9 +265,17 @@ const brief = k => D.briefs.find(b => b.key === k) || {};
 const isBase = k => !!brief(k).baseline;
 const shortName = k => k === "concept:heat_pitch" ? "Team pitch (as written)" : (conceptByKey[k] || {}).name;
 const liftOf = f => D.lifts.find(l => l.feature === f);
-const steamRevs = games.filter(g => g.platform === "steam").map(g => g.reviews).sort((a, b) => a - b);
-const quant = q => steamRevs[Math.floor(q * (steamRevs.length - 1))];
 const DEEP = "concept:thermocline";
+function rankOf(key, field, developedOnly = false) {
+  const entries = S.concepts.filter(s => !developedOnly || !isBase(s.key)).sort((a, b) => b[field] - a[field]);
+  return entries.findIndex(s => s.key === key) + 1;
+}
+function rankQuantile(hist, q) {
+  const target = Math.max(1, Math.ceil(q * hist.reduce((a, b) => a + b, 0)));
+  let count = 0;
+  for (let i = 0; i < hist.length; i++) { count += hist[i]; if (count >= target) return i + 1; }
+  return hist.length;
+}
 
 /* tooltip */
 const tip = $("#tip");
@@ -286,7 +297,7 @@ function hover(el, html) {
 
 /* numbers in the prose */
 (function bind() {
-  const ctx = Object.assign({}, D, { votive: statC("concept:votive"), thermo: statC(DEEP), thermo_c: conceptByKey[DEEP], heat_c: conceptByKey["concept:heat_pitch"] });
+  const ctx = Object.assign({}, D, { votive: statC("concept:votive"), thermo: statC(DEEP), thermo_c: conceptByKey[DEEP], heat_c: conceptByKey["concept:heat_pitch"], deep_rank: rankOf(DEEP, "pos", true) });
   document.querySelectorAll("[data-bind]").forEach(el => {
     const v = el.dataset.bind.split(".").reduce((o, k) => (o == null ? o : o[k]), ctx), f = el.dataset.fmt;
     el.textContent = v == null ? "–" : f === "pct" ? Math.round(v * 100) + "%" : f === "int" ? Number(v).toLocaleString("en-US") : f === "ord" ? ord(Math.round(v)) : String(v);
@@ -299,26 +310,34 @@ function hover(el, html) {
 const IDEAS = S.concepts.slice().sort((a, b) => isBase(a.key) - isBase(b.key) || b.pos - a.pos);
 function renderIdeas() {
   const host = $("#fig-ideas"), W = Math.max(300, host.clientWidth), narrow = W < 620;
-  const rowH = narrow ? 42 : 30, lw = narrow ? 0 : 250, m = { l: lw + 12, r: 16, t: 30, b: 30 }, H = m.t + m.b + IDEAS.length * rowH;
+  const rowH = narrow ? 52 : 38, lw = narrow ? 0 : 250, m = { l: lw + 14, r: 18, t: 64, b: 52 }, H = m.t + m.b + IDEAS.length * rowH;
   host.innerHTML = "";
-  const svg = sv("svg", { viewBox: `0 0 ${W} ${H}`, width: W, height: H, role: "img", "aria-label": "Predicted reviews for each idea" }, host);
-  const lo = 2.5, hi = 5.6, X = v => m.l + (Math.max(lo, Math.min(hi, v)) - lo) / (hi - lo) * (W - m.l - m.r);
-  [[2.5, "300"], [3, "1k"], [3.5, "3k"], [4, "10k"], [4.5, "30k"], [5, "100k"], [5.5, "300k"]].forEach(([v, s]) => { sv("line", { x1: X(v), x2: X(v), y1: m.t - 6, y2: H - m.b, stroke: "var(--grid)" }, svg); txt(svg, X(v), H - m.b + 16, s, { "text-anchor": "middle", "font-size": 11, fill: "var(--muted)" }); });
-  [[Math.log10(quant(0.5)), "Median game"], [Math.log10(quant(0.9)), "Top 10%"]].forEach(([v, s]) => { sv("line", { x1: X(v), x2: X(v), y1: m.t - 10, y2: H - m.b, stroke: "var(--ink2)", "stroke-width": 1.2 }, svg); txt(svg, X(v), m.t - 14, s, { "text-anchor": "middle", "font-size": 11, fill: "var(--ink2)" }); });
+  const svg = sv("svg", { viewBox: `0 0 ${W} ${H}`, width: W, height: H, role: "img", "aria-label": "Exploratory concept ranks from selected popular games, not a commercial forecast" }, host);
+  txt(svg, 0, 16, "Model ranking: 7 concepts + original pitch", { "font-size": 12, "font-weight": 600, fill: "var(--ink)" });
+  txt(svg, 0, 34, "Selected popular games only; not a success forecast", { "font-size": 11, fill: "var(--ink2)" });
+  const X = rank => m.l + (rank - 1) / (IDEAS.length - 1) * (W - m.l - m.r);
+  for (let rank = 1; rank <= IDEAS.length; rank++) {
+    sv("line", { x1: X(rank), x2: X(rank), y1: m.t - 6, y2: H - m.b, stroke: "var(--grid)" }, svg);
+    txt(svg, X(rank), H - m.b + 18, rank, { "text-anchor": "middle", "font-size": 11, fill: "var(--muted)" });
+  }
+  txt(svg, (m.l + W - m.r) / 2, H - 8, `Rank among ${IDEAS.length} entries (1 = highest score)`, { "text-anchor": "middle", "font-size": 11, fill: "var(--ink2)" });
   IDEAS.forEach((s, i) => {
-    const y = m.t + i * rowH + (narrow ? 26 : 14), deep = s.key === DEEP, base = isBase(s.key);
+    const y = m.t + i * rowH + (narrow ? 32 : 18), deep = s.key === DEEP, base = isBase(s.key);
     const name = shortName(s.key), col = deep ? "var(--hl)" : base ? "var(--dot)" : "var(--s2)";
-    if (narrow) txt(svg, 0, y - 14, name, { "font-size": 12, fill: "var(--ink)", "font-weight": deep ? 700 : 500 });
+    const posRank = rankOf(s.key, "pos"), fullRank = rankOf(s.key, "full");
+    const low = rankQuantile(s.rank_hist, 0.05), high = rankQuantile(s.rank_hist, 0.95);
+    if (narrow) txt(svg, 0, y - 17, name, { "font-size": 12, fill: "var(--ink)", "font-weight": deep ? 700 : 500 });
     else txt(svg, lw, y + 4, name, { "font-size": 12.5, fill: "var(--ink)", "text-anchor": "end", "font-weight": deep ? 700 : 500 });
-    sv("line", { x1: X(s.pos_lo), x2: X(s.pos_hi), y1: y, y2: y, stroke: col, "stroke-width": 2.4, opacity: 0.45, "stroke-linecap": "round" }, svg);
-    sv("circle", { cx: X(s.pos), cy: y, r: 6, fill: "var(--panel)", stroke: col, "stroke-width": 2.2 }, svg);
-    const d = sv("circle", { cx: X(s.full), cy: y, r: 6, fill: col, stroke: "var(--halo)", "stroke-width": 1.5, tabindex: 0 }, svg);
-    hover(d, `<b>${esc(name)}</b><br>Idea score: ~${fmt(Math.pow(10, s.pos))} reviews (90% range ${fmt(Math.pow(10, s.pos_lo))} to ${fmt(Math.pow(10, s.pos_hi))})<br>If built as planned: ~${fmt(Math.pow(10, s.full))}`);
+    sv("line", { x1: X(low), x2: X(high), y1: y - 7, y2: y - 7, stroke: col, "stroke-width": 2.4, opacity: 0.45, "stroke-linecap": "round" }, svg);
+    const p = sv("circle", { cx: X(posRank), cy: y - 7, r: 5.5, fill: "var(--panel)", stroke: col, "stroke-width": 2.2, tabindex: 0 }, svg);
+    const d = sv("circle", { cx: X(fullRank), cy: y + 7, r: 5.5, fill: col, stroke: "var(--halo)", "stroke-width": 1.5, tabindex: 0 }, svg);
+    const info = `<b>${esc(name)}</b><br>Idea rank: ${posRank} of ${IDEAS.length}<br>Bootstrap rank range (5th–95th percentile): ${low}–${high}<br>Pitch-assumption rank: ${fullRank} of ${IDEAS.length}<br>Selected popular games only; no estimate of reviews or success probability.`;
+    hover(p, info); hover(d, info);
   });
 }
 (function ideasTable() {
-  $("#tbl-ideas").innerHTML = `<thead><tr><th>Idea</th><th>In one line</th><th class="num">Idea score</th><th class="num">If built as planned</th></tr></thead><tbody>` +
-    IDEAS.map(s => { const c = conceptByKey[s.key]; return `<tr class="${s.key === DEEP ? "hl" : ""}"><td>${esc(shortName(s.key))}</td><td>${esc(brief(s.key).positioning || "")}</td><td class="num">${ord(Math.round(c.positioning_pctile))}</td><td class="num">${ord(Math.round(c.pred_pctile))}</td></tr>`; }).join("") + "</tbody>";
+  $("#tbl-ideas").innerHTML = `<thead><tr><th>Idea</th><th>In one line</th><th class="num">Idea rank / ${IDEAS.length}</th><th class="num">Pitch-assumption rank / ${IDEAS.length}</th></tr></thead><tbody>` +
+    IDEAS.map(s => `<tr class="${s.key === DEEP ? "hl" : ""}"><td>${esc(shortName(s.key))}</td><td>${esc(brief(s.key).positioning || "")}</td><td class="num">${rankOf(s.key, "pos")}</td><td class="num">${rankOf(s.key, "full")}</td></tr>`).join("") + "</tbody>";
 })();
 
 /* Revision comparison uses the same score ordering as the ideas table. */
@@ -326,8 +345,8 @@ function renderIdeas() {
   const candidates = IDEAS.filter(s => !isBase(s.key));
   const posRank = candidates.findIndex(s => s.key === DEEP) + 1;
   const fullRank = candidates.slice().sort((a, b) => b.full - a.full).findIndex(s => s.key === DEEP) + 1;
-  const c = conceptByKey[DEEP], s = statC(DEEP);
-  $("#revision-rank").textContent = `Recomputed on 17 October 2026 using the frozen 16 October dataset and ${S.bootstrap} bootstrap refits. Before: 3rd of 7 developed concepts, 84th-percentile idea score, 93rd-percentile execution scenario and 53% of refits in the top three. After: ${ord(posRank)} of ${candidates.length} developed concepts on idea score (${ord(Math.round(c.positioning_pctile))} percentile), ${ord(fullRank)} on the execution scenario (${ord(Math.round(c.pred_pctile))} percentile), and top three in ${Math.round(s.p_top3 * 100)}% of refits. The original team pitch is an additional baseline, not one of the seven developed concepts. Bootstrap frequencies measure sensitivity to the selected games; they are not probabilities of commercial success.`;
+  const s = statC(DEEP);
+  $("#revision-rank").textContent = `Recomputed on 17 October 2026 using the frozen 16 October dataset and ${S.bootstrap} bootstrap refits. Before: 3rd of 7 developed concepts under both scoring assumptions, and top three in 53% of refits. After: ${ord(posRank)} of ${candidates.length} developed concepts on idea rank, ${ord(fullRank)} under the pitch's execution assumptions, and top three in ${Math.round(s.p_top3 * 100)}% of refits. The chart includes the original pitch as an eighth entry; the deep-sea idea remains 3rd with that baseline included. Bootstrap frequencies describe sensitivity to the selected games; they are not probabilities of commercial success.`;
 })();
 
 /* Figure 2: traits */
@@ -383,7 +402,7 @@ function renderMap() {
     const cx = sx(c.x), cy = sy(c.y), deep = c.key === DEEP, base = isBase(c.key), s = deep ? 10 : 7;
     sv("path", { d: `M${cx} ${cy - s}L${cx + s} ${cy}L${cx} ${cy + s}L${cx - s} ${cy}Z`, fill: base ? "var(--panel)" : deep ? "var(--hl)" : "var(--s2)", stroke: base ? "var(--s2)" : "var(--halo)", "stroke-width": base ? 2 : 1.5 }, svg);
     if (deep || base) txt(svg, cx + s + 4, cy + 4, deep ? "Deep-sea heat metroidvania" : "Team pitch (as written)", { "font-size": 12, "font-weight": deep ? 700 : 500, fill: "var(--ink)", stroke: "var(--halo)", "stroke-width": 3.5, "paint-order": "stroke" });
-    pts.push({ x: cx, y: cy, r: s + 2, html: `<b>${esc(shortName(c.key))}</b><br>Idea score: ${ord(Math.round(c.positioning_pctile))} percentile` });
+    pts.push({ x: cx, y: cy, r: s + 2, html: `<b>${esc(shortName(c.key))}</b><br>Idea rank: ${rankOf(c.key, "pos")} of ${IDEAS.length} entries<br>Exploratory comparison from selected popular games; not a commercial forecast.` });
   });
   svg.addEventListener("pointermove", e => {
     const r = svg.getBoundingClientRect(), mx = (e.clientX - r.left) * W / r.width, my = (e.clientY - r.top) * H / r.height;
