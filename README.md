@@ -2,7 +2,7 @@
 
 **Read the paper: https://redstoneweewee.github.io/metroidvania-research/**
 
-An interactive research paper that maps the 250 most-reviewed metroidvanias in a 148-dimension design space, measures what travels with popularity, finds combinations nobody has built, and pitches **Thermocline**, a game designed for those gaps.
+An interactive research paper that maps the 250 most-reviewed metroidvanias in a 148-dimension design space, measures what travels with popularity, finds combinations nobody has built, and pitches a **deep-sea heat metroidvania** designed for those gaps.
 
 ## Contents
 
