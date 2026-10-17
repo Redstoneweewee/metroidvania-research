@@ -2,11 +2,11 @@
 
 **Read the paper: https://redstoneweewee.github.io/metroidvania-research/**
 
-An interactive research paper that maps 250 popular metroidvanias and close relatives in a 148-dimension design space, measures what travels with popularity, explores underrepresented combinations, and pitches a **deep-sea heat metroidvania** designed for those gaps.
+A concise research brief based on 250 popular metroidvanias and close relatives. It explains a **deep-sea heat metroidvania**, six other ideas, why they are worth prototyping, and how they were compared. About an eight-minute read.
 
 The 17 October 2026 revision gives every core swim move a heat attack, introduces pulling vents and pushing current generators, and separates world pressure valves from reusable player abilities. It includes the design tradeoffs and a recomputed ranking: 3rd of seven developed concepts, unchanged because the model's broad feature annotations are unchanged.
 
-Concept comparisons show relative ranks and bootstrap rank stability, rather than review-count forecasts. The model was trained on a selected set of popular games and cannot estimate a new release's expected reviews or its chance of becoming a hit.
+The chart shows comparison scores and error ranges, increasing from left to right. Scores rescale the original model output: 50 is the mean held-out prediction for the selected Steam games, and 10 points is one standard deviation. They are relative units, not percentages or review forecasts. The model was trained on selected popular games and cannot estimate a new release's expected results or its chance of becoming a hit.
 
 ## Contents
 
