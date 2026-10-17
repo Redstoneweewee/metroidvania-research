@@ -1,8 +1,10 @@
-# The Metroidvania Gap
+# Metroidvania Research
 
 **Read the paper: https://redstoneweewee.github.io/metroidvania-research/**
 
-An interactive research paper that maps the 250 most-reviewed metroidvanias in a 148-dimension design space, measures what travels with popularity, finds combinations nobody has built, and pitches a **deep-sea heat metroidvania** designed for those gaps.
+An interactive research paper that maps 250 popular metroidvanias and close relatives in a 148-dimension design space, measures what travels with popularity, explores underrepresented combinations, and pitches a **deep-sea heat metroidvania** designed for those gaps.
+
+The 17 October 2026 revision gives every core swim move a heat attack, introduces pulling vents and pushing current generators, and separates world pressure valves from reusable player abilities. It includes the design tradeoffs and a recomputed ranking: 3rd of seven developed concepts, unchanged because the model's broad feature annotations are unchanged.
 
 ## Contents
 
