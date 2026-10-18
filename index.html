@@ -11,6 +11,7 @@
   --rule: #dfe3e9; --grid: #e9ecf1; --grid-strong: #cfd5de; --wash: #f1f4f8;
   --hl: #a3265a; --s1: #2a78d6; --s2: #eb6834; --dot: #a3abb8; --dot-dim: #d9dee6;
   --pos: #2a78d6; --neg: #e34948; --halo: #ffffff;
+  --good: #1baf7a; --warn: #e39b16; --bad: #e34948; --fade: #a3abb8;
   --q1: #cde2fb; --q2: #9ec5f4; --q3: #6da7ec; --q4: #3987e5; --q5: #256abf; --q6: #184f95;
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --radius: 6px;
@@ -248,7 +249,8 @@ figure.diagram img { display: block; width: 100%; height: auto; border-radius: 4
 <p>We also checked which Steam tags are crowding in across a bigger set of 979 Steam metroidvanias. Souls-likes and dark fantasy pay off but are crowding in fast, combat-focused and linear games are crowding in without the payoff, and tags like co-op, female protagonists and high difficulty pay off while getting rarer.</p>
 <figure>
   <div id="fig-crowding" class="chart"></div>
-  <figcaption>Each dot is a Steam tag, measured across 979 Steam metroidvanias with 10+ reviews (flops included). Across: how much its share of new releases grew, from up to 2020 to 2023–26. Up: how many more reviews games with that tag get. Top left is the sweet spot: rewarded but not crowded yet. Hover a dot for details.</figcaption>
+  <div class="legend" id="crowd-legend"></div>
+  <figcaption>Each dot is a Steam tag, measured across 979 Steam metroidvanias with 10+ reviews (flops included). Across: how much its share of new releases grew, from up to 2020 to 2023–26. Up: how many more reviews games with that tag get. Green tags are the sweet spot: rewarded but not crowded yet. Orange ones pay off but are filling up, red ones are filling up without paying off, and grey ones are fading. Hover a dot for details.</figcaption>
 </figure>
 <p>Two models compared traits with reviews for the 243 Steam games, accounting for release year, budget and licensed characters. Their outputs are on a comparison scale: 50 is the average prediction on games left out of training, 10 points is one standard deviation, and the error ranges use the same scale.</p>
 <p>The biggest limitation is the sample: Games with few reviews are mostly missing. Design ratings also involve judgment, and the models don't measure marketing or polish, so finding out which idea is fun still means building and playing it.</p>
@@ -425,6 +427,9 @@ function renderCrowding() {
   const xl = Math.log10(0.4), xh = Math.log10(10), yl = Math.log10(0.25), yh = Math.log10(4);
   const X = v => m.l + (Math.log10(Math.max(0.4, Math.min(10, v))) - xl) / (xh - xl) * (W - m.l - m.r);
   const Y = lg => m.t + (yh - Math.max(yl, Math.min(yh, lg))) / (yh - yl) * (H - m.t - m.b);
+  const QUAD = [["var(--good)", 0, 1], ["var(--warn)", 1, 1], ["var(--fade)", 0, 0], ["var(--bad)", 1, 0]];
+  QUAD.forEach(([c, right, top]) => sv("rect", { x: right ? X(1) : m.l, y: top ? m.t : Y(0), width: right ? W - m.r - X(1) : X(1) - m.l, height: top ? Y(0) - m.t : H - m.b - Y(0), fill: c, "fill-opacity": 0.07 }, svg));
+  const quad = t => t.lift_log10 >= 0 ? (t.supply_growth < 1 ? "var(--good)" : "var(--warn)") : (t.supply_growth < 1 ? "var(--fade)" : "var(--bad)");
   [0.5, 1, 2, 4, 8].forEach(v => { sv("line", { x1: X(v), x2: X(v), y1: m.t, y2: H - m.b, stroke: v === 1 ? "var(--grid-strong)" : "var(--grid)" }, svg); txt(svg, X(v), H - m.b + 15, v + "x", { "text-anchor": "middle", "font-size": 11, fill: "var(--muted)" }); });
   [0.25, 0.5, 1, 2, 4].forEach(v => { const y = Y(Math.log10(v)); sv("line", { x1: m.l, x2: W - m.r, y1: y, y2: y, stroke: v === 1 ? "var(--grid-strong)" : "var(--grid)" }, svg); txt(svg, m.l - 6, y + 4, v + "x", { "text-anchor": "end", "font-size": 11, fill: "var(--muted)" }); });
   txt(svg, (m.l + W - m.r) / 2, H - 8, "Growth in share of new releases →", { "text-anchor": "middle", "font-size": 11.5, fill: "var(--ink2)" });
@@ -438,12 +443,14 @@ function renderCrowding() {
   const tags = D.base_rates.slice().sort((a, b) => LABELS.has(a.tag) - LABELS.has(b.tag));
   tags.forEach(t => {
     const cx = X(t.supply_growth), cy = Y(t.lift_log10), on = LABELS.has(t.tag);
-    const d = sv("circle", { cx, cy, r: on ? 5 : 3.5, fill: on ? "var(--s1)" : "var(--dot)", stroke: "var(--halo)", "stroke-width": 1.5, tabindex: on ? 0 : -1 }, svg);
+    const d = sv("circle", { cx, cy, r: on ? 5.5 : 3.5, fill: quad(t), "fill-opacity": on ? 1 : 0.55, stroke: "var(--halo)", "stroke-width": 1.5, tabindex: on ? 0 : -1 }, svg);
     const below = t.tag === "Dark Fantasy";  // sits right beside Souls-like, so its label goes underneath
     if (on) txt(svg, below ? cx : cx + (cx > W * 0.72 ? -8 : 8), below ? cy + 17 : cy - 7, t.tag, { "font-size": 11, fill: "var(--ink)", "text-anchor": below ? "middle" : cx > W * 0.72 ? "end" : "start", stroke: "var(--halo)", "stroke-width": 3, "paint-order": "stroke" });
     hover(d, `<b>${esc(t.tag)}</b><br>${t.n_games} games, ${Math.pow(10, t.lift_log10).toFixed(2)}x the reviews<br>Share of new releases: ${(t.share_early * 100).toFixed(1)}% up to 2020, ${(t.share_recent * 100).toFixed(1)}% in 2023–26`);
   });
 }
+$("#crowd-legend").innerHTML = [["var(--good)", "Rewarded, not crowded yet"], ["var(--warn)", "Rewarded, crowding in"], ["var(--bad)", "Crowding, not rewarded"], ["var(--fade)", "Fading"]]
+  .map(([c, label]) => `<span class="key"><span class="swatch" style="background:${c}"></span>${label}</span>`).join("");
 function renderAll() { renderIdeas(); renderMap(); renderCrowding(); }
 renderAll();
 let resizeTimer, lastW = window.innerWidth;
