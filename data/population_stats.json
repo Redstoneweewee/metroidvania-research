@@ -593,8 +593,8 @@
    "p": 0.2245,
    "lo": 0.1087,
    "hi": 0.3982,
-   "x": 27.38,
-   "y": 8.417
+   "x": 27.154,
+   "y": 8.557
   },
   {
    "key": "concept:votive",
@@ -614,8 +614,8 @@
    "p": 0.2097,
    "lo": 0.1109,
    "hi": 0.3401,
-   "x": 28.972,
-   "y": 9.676
+   "x": 28.848,
+   "y": 9.724
   },
   {
    "key": "concept:hyakki",
@@ -635,8 +635,8 @@
    "p": 0.2034,
    "lo": 0.0839,
    "hi": 0.3739,
-   "x": 31.584,
-   "y": 10.005
+   "x": 31.605,
+   "y": 9.771
   },
   {
    "key": "concept:swift",
@@ -656,29 +656,28 @@
    "p": 0.1673,
    "lo": 0.0832,
    "hi": 0.2992,
-   "x": 27.54,
-   "y": 8.459
+   "x": 27.749,
+   "y": 8.274
   },
   {
    "key": "concept:thermocline",
    "name": "Deep-sea heat metroidvania",
    "tags": [
     "Metroidvania",
+    "Platformer",
+    "2D Platformer",
     "Exploration",
     "Atmospheric",
-    "2D Platformer",
-    "Action-Adventure",
-    "Hand-drawn",
-    "Platformer"
+    "Adventure"
    ],
    "unmodelled": [
     "Underwater"
    ],
-   "p": 0.1542,
-   "lo": 0.0768,
-   "hi": 0.2554,
-   "x": 28.429,
-   "y": 10.575
+   "p": 0.1384,
+   "lo": 0.0791,
+   "hi": 0.233,
+   "x": 27.43,
+   "y": 6.337
   },
   {
    "key": "concept:reliquary",
@@ -696,8 +695,8 @@
    "p": 0.0998,
    "lo": 0.0392,
    "hi": 0.2211,
-   "x": 30.901,
-   "y": 9.814
+   "x": 31.734,
+   "y": 8.961
   },
   {
    "key": "concept:lichen",
@@ -717,8 +716,8 @@
    "p": 0.0713,
    "lo": 0.0286,
    "hi": 0.1508,
-   "x": 26.556,
-   "y": 9.884
+   "x": 26.638,
+   "y": 10.056
   },
   {
    "key": "concept:heat_pitch",
@@ -738,8 +737,8 @@
    "p": 0.0477,
    "lo": 0.0205,
    "hi": 0.095,
-   "x": 28.186,
-   "y": 7.187
+   "x": 28.183,
+   "y": 6.755
   }
  ],
  "assumptions": {
@@ -1311,6 +1310,51 @@
  ],
  "n_early": 675,
  "n_late": 948,
+ "move_first": {
+  "n": 384,
+  "top": [
+   {
+    "tag": "Platformer",
+    "share": 0.701
+   },
+   {
+    "tag": "2D Platformer",
+    "share": 0.656
+   },
+   {
+    "tag": "Adventure",
+    "share": 0.464
+   },
+   {
+    "tag": "Action",
+    "share": 0.43
+   },
+   {
+    "tag": "Exploration",
+    "share": 0.414
+   },
+   {
+    "tag": "Action-Adventure",
+    "share": 0.344
+   },
+   {
+    "tag": "2D",
+    "share": 0.279
+   },
+   {
+    "tag": "Pixel Graphics",
+    "share": 0.221
+   },
+   {
+    "tag": "Side Scroller",
+    "share": 0.167
+   },
+   {
+    "tag": "Puzzle Platformer",
+    "share": 0.148
+   }
+  ]
+ },
  "deep_rank": 5,
  "n_ideas": 7,
  "games": [
