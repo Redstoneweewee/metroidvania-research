@@ -255,6 +255,7 @@ figure.diagram img { display: block; width: 100%; height: auto; border-radius: 4
     <!-- Populated by JS -->
   </table>
 </div>
+<p style="margin-top: 10px;"><button class="btn" id="tbl-tag-more">Show all 56 tags</button></p>
 <p class="small muted" style="margin-top: 8px;">Baseline: In the $10–19.99 band at 24 months, a typical game reaches 500 reviews about 17% of the time (12.3% across the entire population). Odds multipliers reflect held-out logistic regression coefficients with 90% bootstrap ranges from 200 resampled refits. Release growth measures the change in new release share (2024–26 vs. 2021–23). Tags held by fewer than 25 games (like Underwater, n=5) are excluded from the model.</p>
 
 <h3>What this means for game developers</h3>
@@ -483,7 +484,7 @@ if (mapLegend) {
 }
 
 /* 3b. Complete Steam tag rankings and market dynamics table */
-const TAG_TBL = { sort: "odds", dir: -1, q: "", filter: "all" };
+const TAG_TBL = { sort: "odds", dir: -1, q: "", filter: "all", all: false };
 const TAG_COLS = [
   ["rank", "#", true],
   ["tag", "Steam Tag", false],
@@ -546,8 +547,15 @@ function renderTagRankingsTable() {
     return TAG_TBL.dir * (va - vb);
   });
 
+  const shown = TAG_TBL.all ? rows : rows.slice(0, 10);
+  const tagMoreBtn = $("#tbl-tag-more");
+  if (tagMoreBtn) {
+    tagMoreBtn.hidden = rows.length <= 10;
+    tagMoreBtn.textContent = TAG_TBL.all ? "Show top 10 tags" : `Show all ${rows.length} tags`;
+  }
+
   host.innerHTML = `<thead><tr>${TAG_COLS.map(([k, label, num]) => `<th class="${num ? "num" : ""}"><button data-tag-sort="${k}">${label}${TAG_TBL.sort === k ? (TAG_TBL.dir > 0 ? " ↑" : " ↓") : ""}</button></th>`).join("")}</tr></thead><tbody>` +
-    (rows.length ? rows.map(t => {
+    (shown.length ? shown.map(t => {
       const origRank = POP.tag_effects.findIndex(x => x.tag === t.tag) + 1;
       const oddsColor = t.isClear ? (t.odds >= 1 ? "var(--good)" : "var(--bad)") : "var(--ink)";
       const growthPct = Math.round((t.growth - 1) * 100);
@@ -590,6 +598,14 @@ if (tagFilterContainer) {
     tagFilterContainer.querySelectorAll("button").forEach(btn => btn.classList.remove("active"));
     b.classList.add("active");
     TAG_TBL.filter = b.dataset.filter;
+    TAG_TBL.all = false;
+    renderTagRankingsTable();
+  });
+}
+const tagMoreBtn = $("#tbl-tag-more");
+if (tagMoreBtn) {
+  tagMoreBtn.addEventListener("click", () => {
+    TAG_TBL.all = !TAG_TBL.all;
     renderTagRankingsTable();
   });
 }
