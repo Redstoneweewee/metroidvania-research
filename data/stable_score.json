@@ -1,0 +1,917 @@
+{
+  "version": "combined-uniform-design-v5-baseline-anchored",
+  "tag_budget": 7,
+  "description_budget": 300,
+  "minimum_training_support": 25,
+  "n_games": 1245,
+  "n_hits": 153,
+  "n_non_hits": 1092,
+  "snapshot": "2026-10-16",
+  "metrics": {
+    "auc": 0.8582501376619024,
+    "brier": 0.08028396700118562,
+    "log_loss": 0.2696179682011892,
+    "mean_prediction": 0.12252263740481086,
+    "base_rate": 0.12289156626506025,
+    "calibration_intercept": 0.3591352667897244,
+    "calibration_slope": 1.2385841184608608,
+    "calibration_bins": [
+      {
+        "n": 249,
+        "weight": 249.0,
+        "predicted": 0.020780234210525588,
+        "observed": 0.020080321285140562
+      },
+      {
+        "n": 249,
+        "weight": 249.0,
+        "predicted": 0.03630617396495616,
+        "observed": 0.01606425702811245
+      },
+      {
+        "n": 249,
+        "weight": 249.0,
+        "predicted": 0.05878977592783325,
+        "observed": 0.028112449799196786
+      },
+      {
+        "n": 249,
+        "weight": 249.0,
+        "predicted": 0.1365959719829603,
+        "observed": 0.14056224899598393
+      },
+      {
+        "n": 249,
+        "weight": 249.0,
+        "predicted": 0.3601410309377789,
+        "observed": 0.40963855421686746
+      }
+    ],
+    "outer_design_weights": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "mixed_batch_metrics": {
+    "auc": 0.8556106203165027,
+    "brier": 0.07951085944022956,
+    "log_loss": 0.2686196914022038,
+    "mean_prediction": 0.12359695609493448,
+    "base_rate": 0.12289156626506025,
+    "calibration_intercept": 0.2744744406432194,
+    "calibration_slope": 1.1933056384638114,
+    "calibration_bins": [
+      {
+        "n": 249,
+        "weight": 249.0,
+        "predicted": 0.019252037533848246,
+        "observed": 0.012048192771084338
+      },
+      {
+        "n": 249,
+        "weight": 249.0,
+        "predicted": 0.0339186537185022,
+        "observed": 0.01606425702811245
+      },
+      {
+        "n": 249,
+        "weight": 249.0,
+        "predicted": 0.057067721784494194,
+        "observed": 0.040160642570281124
+      },
+      {
+        "n": 249,
+        "weight": 249.0,
+        "predicted": 0.13719568466268303,
+        "observed": 0.13654618473895583
+      },
+      {
+        "n": 249,
+        "weight": 249.0,
+        "predicted": 0.3705506827751448,
+        "observed": 0.40963855421686746
+      }
+    ],
+    "outer_design_weights": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "seed_metrics": [
+    {
+      "seed": 184,
+      "auc": 0.8582501376619024,
+      "brier": 0.08028396700118562,
+      "calibration_slope": 1.2385841184608608,
+      "design_weight": 0.0
+    },
+    {
+      "seed": 491,
+      "auc": 0.855562737915679,
+      "brier": 0.08069702065010403,
+      "calibration_slope": 1.2200695770638588,
+      "design_weight": 0.0
+    },
+    {
+      "seed": 1729,
+      "auc": 0.8551976346093993,
+      "brier": 0.08072840278507079,
+      "calibration_slope": 1.2193506612275382,
+      "design_weight": 0.05
+    },
+    {
+      "seed": 3011,
+      "auc": 0.8519954990543226,
+      "brier": 0.0810144476889549,
+      "calibration_slope": 1.1914988090965803,
+      "design_weight": 0.0
+    },
+    {
+      "seed": 7919,
+      "auc": 0.8420419449831216,
+      "brier": 0.08195984231054493,
+      "calibration_slope": 1.1159445415439937,
+      "design_weight": 0.05
+    }
+  ],
+  "design_weight": 0.0,
+  "tag_weight": 0.6,
+  "control_weight": 0.4,
+  "typical": {
+    "p": 0.16873374550223097,
+    "lo": 0.1330494520669017,
+    "hi": 0.1928600545592031
+  },
+  "ideas": [
+    {
+      "key": "concept:marginalia",
+      "name": "Dark language-puzzle metroidvania",
+      "p": 0.22812146829175892,
+      "lo": 0.14265275225493254,
+      "hi": 0.2768193919009693,
+      "p_no_text": 0.22812146829175892,
+      "p_full_brief": 0.22812146829175892,
+      "seed_min": 0.22384981423674216,
+      "seed_max": 0.2359641627198992,
+      "subsample_min": 0.2273038963159587,
+      "subsample_max": 0.29063321721958485,
+      "rank_90pct": [
+        1.0,
+        4.0
+      ],
+      "tags": [
+        "Metroidvania",
+        "Puzzle",
+        "Exploration",
+        "Atmospheric",
+        "Dark Fantasy",
+        "Story Rich",
+        "Adventure",
+        "Mystery"
+      ],
+      "evidence": {
+        "sub=brainvania": [
+          "description:knowledge opens"
+        ],
+        "verb=explore": [
+          "description:explore",
+          "tag:Exploration"
+        ],
+        "verb=deduce": [
+          "description:learn a lost glyph language",
+          "description:understand",
+          "tag:Puzzle"
+        ],
+        "setting=dark_fantasy": [
+          "tag:Dark Fantasy"
+        ],
+        "art=hand_drawn": [
+          "description:illustrated"
+        ],
+        "protag=creature": [
+          "description:as a doodle"
+        ],
+        "focus.puzzle": [
+          "description:learn a lost glyph language",
+          "tag:Puzzle"
+        ],
+        "focus.exploration": [
+          "description:explore",
+          "tag:Exploration"
+        ],
+        "gate.knowledge": [
+          "description:knowledge opens",
+          "description:learn a lost glyph language"
+        ],
+        "mech.story": [
+          "tag:Story Rich"
+        ]
+      },
+      "rare_evidence": [
+        "sub=brainvania",
+        "protag=creature",
+        "gate.knowledge"
+      ]
+    },
+    {
+      "key": "concept:votive",
+      "name": "Gothic moth platformer",
+      "p": 0.21065836350633171,
+      "lo": 0.14179261769485002,
+      "hi": 0.26154441419038243,
+      "p_no_text": 0.21065836350633171,
+      "p_full_brief": 0.21065836350633171,
+      "seed_min": 0.20705758694977777,
+      "seed_max": 0.21655936326370298,
+      "subsample_min": 0.206999394838925,
+      "subsample_max": 0.24219811651280534,
+      "rank_90pct": [
+        1.0,
+        4.0
+      ],
+      "tags": [
+        "Metroidvania",
+        "Exploration",
+        "Atmospheric",
+        "2D Platformer",
+        "Dark Fantasy",
+        "Hand-drawn",
+        "Platformer",
+        "Gothic"
+      ],
+      "evidence": {
+        "verb=move": [
+          "description:flutter",
+          "description:glide",
+          "tag:2D Platformer",
+          "tag:Platformer"
+        ],
+        "verb=explore": [
+          "description:explore",
+          "tag:Exploration"
+        ],
+        "setting=gothic": [
+          "description:cathedral"
+        ],
+        "setting=dark_fantasy": [
+          "tag:Dark Fantasy"
+        ],
+        "art=hand_drawn": [
+          "tag:Hand-drawn"
+        ],
+        "dim=side": [
+          "tag:2D Platformer"
+        ],
+        "protag=creature": [
+          "description:as a moth"
+        ],
+        "focus.platforming": [
+          "description:flutter",
+          "tag:2D Platformer",
+          "tag:Platformer"
+        ],
+        "focus.exploration": [
+          "description:explore",
+          "tag:Exploration"
+        ]
+      },
+      "rare_evidence": [
+        "protag=creature"
+      ]
+    },
+    {
+      "key": "concept:hyakki",
+      "name": "Dark Japanese folklore action game",
+      "p": 0.20701703043437422,
+      "lo": 0.13889702268641585,
+      "hi": 0.26022522321754277,
+      "p_no_text": 0.20701703043437422,
+      "p_full_brief": 0.20701703043437422,
+      "seed_min": 0.20519620186837134,
+      "seed_max": 0.2167115969637745,
+      "subsample_min": 0.19744682247503492,
+      "subsample_max": 0.23871801714967594,
+      "rank_90pct": [
+        1.0,
+        5.0
+      ],
+      "tags": [
+        "Metroidvania",
+        "Souls-like",
+        "Action",
+        "Dark Fantasy",
+        "Story Rich",
+        "Hand-drawn",
+        "Action-Adventure",
+        "Folklore"
+      ],
+      "evidence": {
+        "sub=soulsvania": [
+          "tag:Souls-like"
+        ],
+        "verb=deduce": [
+          "description:learn the rules"
+        ],
+        "setting=dark_fantasy": [
+          "tag:Dark Fantasy"
+        ],
+        "setting=myth_folklore": [
+          "description:yokai"
+        ],
+        "culture=japanese": [
+          "description:japanese",
+          "description:yokai"
+        ],
+        "art=hand_drawn": [
+          "tag:Hand-drawn"
+        ],
+        "focus.combat": [
+          "description:fight",
+          "tag:Souls-like"
+        ],
+        "focus.puzzle": [
+          "description:learn the rules"
+        ],
+        "gate.knowledge": [
+          "description:learn the rules"
+        ],
+        "mech.difficulty": [
+          "tag:Souls-like"
+        ],
+        "mech.story": [
+          "tag:Story Rich"
+        ]
+      },
+      "rare_evidence": [
+        "culture=japanese",
+        "gate.knowledge"
+      ]
+    },
+    {
+      "key": "concept:swift",
+      "name": "3D bird-flight platformer",
+      "p": 0.19361686106907516,
+      "lo": 0.11756571211219916,
+      "hi": 0.21576123349584014,
+      "p_no_text": 0.19361686106907516,
+      "p_full_brief": 0.19361686106907516,
+      "seed_min": 0.17915642680559704,
+      "seed_max": 0.19361686106907516,
+      "subsample_min": 0.17518105141939308,
+      "subsample_max": 0.1940375644656725,
+      "rank_90pct": [
+        1.0,
+        7.0
+      ],
+      "tags": [
+        "3D Platformer",
+        "Platformer",
+        "Exploration",
+        "Atmospheric",
+        "Adventure",
+        "3D",
+        "Metroidvania",
+        "Flight"
+      ],
+      "evidence": {
+        "sub=platformvania": [
+          "description:momentum and flight"
+        ],
+        "sub=3dvania": [
+          "description:3d world",
+          "tag:3D Platformer"
+        ],
+        "verb=move": [
+          "description:flight",
+          "description:updrafts",
+          "description:wall-skims",
+          "tag:3D Platformer",
+          "tag:Platformer"
+        ],
+        "verb=explore": [
+          "description:explore",
+          "tag:Exploration"
+        ],
+        "dim=tp3d": [
+          "tag:3D Platformer"
+        ],
+        "protag=creature": [
+          "description:guide a young swift"
+        ],
+        "focus.platforming": [
+          "description:flight",
+          "description:updrafts",
+          "tag:3D Platformer",
+          "tag:Platformer"
+        ],
+        "focus.exploration": [
+          "description:explore",
+          "tag:Exploration"
+        ]
+      },
+      "rare_evidence": [
+        "protag=creature"
+      ]
+    },
+    {
+      "key": "concept:thermocline",
+      "name": "Deep-sea heat metroidvania",
+      "p": 0.13848535816559718,
+      "lo": 0.0976317524838715,
+      "hi": 0.17861604713430287,
+      "p_no_text": 0.13848535816559718,
+      "p_full_brief": 0.13848535816559718,
+      "seed_min": 0.13041247312356963,
+      "seed_max": 0.14499413991966084,
+      "subsample_min": 0.13488052108032467,
+      "subsample_max": 0.16053104098910376,
+      "rank_90pct": [
+        4.0,
+        8.0
+      ],
+      "tags": [
+        "Metroidvania",
+        "Platformer",
+        "2D Platformer",
+        "Exploration",
+        "Atmospheric",
+        "Underwater",
+        "Adventure"
+      ],
+      "evidence": {
+        "verb=move": [
+          "description:dash",
+          "description:push off",
+          "tag:2D Platformer",
+          "tag:Platformer"
+        ],
+        "verb=explore": [
+          "description:explore",
+          "tag:Exploration"
+        ],
+        "setting=underwater": [
+          "description:diver",
+          "description:underwater",
+          "tag:Underwater"
+        ],
+        "dim=side": [
+          "tag:2D Platformer"
+        ],
+        "focus.combat": [
+          "description:attack"
+        ],
+        "focus.platforming": [
+          "description:dash",
+          "description:push off",
+          "tag:2D Platformer",
+          "tag:Platformer"
+        ],
+        "focus.exploration": [
+          "description:explore",
+          "tag:Exploration"
+        ]
+      },
+      "rare_evidence": [
+        "setting=underwater"
+      ]
+    },
+    {
+      "key": "concept:reliquary",
+      "name": "Starship-cathedral action game",
+      "p": 0.12236015837759781,
+      "lo": 0.09164628449079493,
+      "hi": 0.20655086120083518,
+      "p_no_text": 0.12236015837759781,
+      "p_full_brief": 0.12236015837759781,
+      "seed_min": 0.11880940175314987,
+      "seed_max": 0.13786779080773978,
+      "subsample_min": 0.1207879157755376,
+      "subsample_max": 0.15074153820767502,
+      "rank_90pct": [
+        2.0,
+        8.0
+      ],
+      "tags": [
+        "Metroidvania",
+        "Souls-like",
+        "Action",
+        "Sci-fi",
+        "Atmospheric",
+        "Hack and Slash",
+        "Story Rich"
+      ],
+      "evidence": {
+        "sub=soulsvania": [
+          "tag:Souls-like"
+        ],
+        "verb=strike": [
+          "description:duel",
+          "tag:Hack and Slash"
+        ],
+        "verb=explore": [
+          "description:discover",
+          "description:explore"
+        ],
+        "setting=gothic": [
+          "description:cathedral"
+        ],
+        "setting=sci_fi": [
+          "description:starship",
+          "tag:Sci-fi"
+        ],
+        "focus.combat": [
+          "description:duel",
+          "description:weapons",
+          "tag:Hack and Slash",
+          "tag:Souls-like"
+        ],
+        "focus.exploration": [
+          "description:discover",
+          "description:explore"
+        ],
+        "mech.difficulty": [
+          "tag:Souls-like"
+        ],
+        "mech.story": [
+          "tag:Story Rich"
+        ]
+      },
+      "rare_evidence": []
+    },
+    {
+      "key": "concept:lichen",
+      "name": "Two-player ecosystem game",
+      "p": 0.0970525940501285,
+      "lo": 0.07375737513802248,
+      "hi": 0.17954286330449165,
+      "p_no_text": 0.0970525940501285,
+      "p_full_brief": 0.0970525940501285,
+      "seed_min": 0.08938517138290489,
+      "seed_max": 0.1149113035600415,
+      "subsample_min": 0.09170936588777232,
+      "subsample_max": 0.12204171188777597,
+      "rank_90pct": [
+        4.950000000000001,
+        8.0
+      ],
+      "tags": [
+        "Metroidvania",
+        "Puzzle Platformer",
+        "Exploration",
+        "Cute",
+        "Adventure",
+        "Puzzle",
+        "Casual",
+        "Online Co-Op"
+      ],
+      "evidence": {
+        "sub=puzzlevania": [
+          "tag:Puzzle Platformer"
+        ],
+        "verb=explore": [
+          "description:explore",
+          "tag:Exploration"
+        ],
+        "verb=deduce": [
+          "tag:Puzzle"
+        ],
+        "verb=collect": [
+          "description:grow a persistent ecosystem"
+        ],
+        "setting=nature": [
+          "description:ecosystem",
+          "description:moss"
+        ],
+        "palette=vibrant": [
+          "description:colorful"
+        ],
+        "protag=abstract": [
+          "description:as a fungus"
+        ],
+        "focus.puzzle": [
+          "tag:Puzzle",
+          "tag:Puzzle Platformer"
+        ],
+        "focus.exploration": [
+          "description:explore",
+          "tag:Exploration"
+        ],
+        "coop": [
+          "description:play together"
+        ]
+      },
+      "rare_evidence": [
+        "protag=abstract"
+      ]
+    },
+    {
+      "key": "concept:heat_pitch",
+      "name": "Team pitch: ocean action metroidvania (as written)",
+      "p": 0.0898021106386541,
+      "lo": 0.07143544364461514,
+      "hi": 0.19062963017149961,
+      "p_no_text": 0.0898021106386541,
+      "p_full_brief": 0.0898021106386541,
+      "seed_min": 0.08324728582023719,
+      "seed_max": 0.110570820306616,
+      "subsample_min": 0.08446307398883826,
+      "subsample_max": 0.11279903618020623,
+      "rank_90pct": [
+        4.0,
+        8.0
+      ],
+      "tags": [
+        "Metroidvania",
+        "Action",
+        "Adventure",
+        "2D Platformer",
+        "Hack and Slash",
+        "Exploration",
+        "Hand-drawn",
+        "Underwater"
+      ],
+      "evidence": {
+        "verb=strike": [
+          "description:cutlass",
+          "description:trident",
+          "tag:Hack and Slash"
+        ],
+        "verb=shoot": [
+          "description:harpoon gun"
+        ],
+        "verb=move": [
+          "tag:2D Platformer"
+        ],
+        "verb=explore": [
+          "tag:Exploration"
+        ],
+        "setting=underwater": [
+          "description:ocean",
+          "description:underwater"
+        ],
+        "art=hand_drawn": [
+          "description:hand-drawn",
+          "tag:Hand-drawn"
+        ],
+        "dim=side": [
+          "tag:2D Platformer"
+        ],
+        "focus.combat": [
+          "description:fight",
+          "tag:Hack and Slash"
+        ],
+        "focus.platforming": [
+          "tag:2D Platformer"
+        ],
+        "focus.exploration": [
+          "tag:Exploration"
+        ]
+      },
+      "rare_evidence": [
+        "setting=underwater"
+      ]
+    }
+  ],
+  "publication": {
+    "eligible": true,
+    "reasons": [],
+    "design_ranking_supported": false
+  },
+  "forecast_kind": "tags_and_controls",
+  "stability": {
+    "max_seed_range": 0.02732353448637881,
+    "max_subsample_range": 0.06332932090362614,
+    "max_full_short_shift": 0.0,
+    "max_no_text_shift": 0.0
+  },
+  "bootstrap": {
+    "n": 200,
+    "all_retuned": true,
+    "design_weights": [
+      0.3,
+      0.0,
+      0.0,
+      0.05,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.6,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.05,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.15000000000000002,
+      0.0,
+      0.0,
+      0.0,
+      0.2,
+      0.15000000000000002,
+      0.0,
+      0.050000000000000044,
+      0.0,
+      0.0,
+      0.0,
+      0.15,
+      0.0,
+      0.15000000000000002,
+      0.0,
+      0.15000000000000002,
+      0.55,
+      0.6,
+      0.35,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.1,
+      0.0,
+      0.0,
+      0.1,
+      0.05,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.1,
+      0.0,
+      0.1,
+      0.0,
+      0.05,
+      0.3,
+      0.0,
+      0.0,
+      0.0,
+      0.09999999999999998,
+      0.0,
+      0.1,
+      0.0,
+      0.44999999999999996,
+      0.0,
+      0.3,
+      0.1,
+      0.44999999999999996,
+      0.0,
+      0.0,
+      0.0,
+      0.35,
+      0.0,
+      0.0,
+      0.0,
+      0.04999999999999999,
+      0.0,
+      0.0,
+      0.39999999999999997,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.25,
+      0.0,
+      0.1,
+      0.0,
+      0.35,
+      0.15,
+      0.0,
+      0.0,
+      0.0,
+      0.25,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.15,
+      0.39999999999999997,
+      0.0,
+      0.15000000000000002,
+      0.0,
+      0.2,
+      0.0,
+      0.0,
+      0.0,
+      0.30000000000000004,
+      0.2,
+      0.0,
+      0.0,
+      0.1,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.09999999999999998,
+      0.0,
+      0.049999999999999996,
+      0.0,
+      0.35000000000000003,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.3,
+      0.15000000000000002,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.05,
+      0.2,
+      0.05,
+      0.15,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.09999999999999998,
+      0.0,
+      0.0,
+      0.0,
+      0.2,
+      0.6,
+      0.0,
+      0.0,
+      0.2,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.35000000000000003,
+      0.0,
+      0.0,
+      0.1,
+      0.1,
+      0.6,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.05000000000000001,
+      0.25,
+      0.0,
+      0.35,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.55,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.05,
+      0.0,
+      0.1,
+      0.0,
+      0.0,
+      0.0,
+      0.05,
+      0.0,
+      0.35
+    ],
+    "note": "Stratified game-level bootstrap, every base model and blend retuned; calibrated single-seed members approximate ensemble fit uncertainty."
+  },
+  "feature_schema_columns": 148,
+  "supported_design_features": 44,
+  "active_design_features": 0,
+  "observed_design_features": 80,
+  "input_sha256": {
+    "scripts\\stable_score.py": "75856c17359b0daf0034bf033a1c675db30f61386e552de61f766d9fd689675a",
+    "scripts\\11_stable_design.py": "ee628a2fe7aef05aded3d5e8cface9823387f989b2da99e0e1a0311ad2288e9b",
+    "scripts\\design_evidence.py": "eb799b1174a1ab1d53da5c93a7186220984964745bd2b818281ff89f3cda8f9a",
+    "data\\curated\\pop_batches\\stability_plan.md": "15bb01e0bfa46cc488569aceeede0c8c072d4f3460f2f23c245ffb49d7dfd140",
+    "data\\raw\\design_census_inputs.json": "25b492fab53a26d4b37095360898f436e4d40970c21e4452318f9dc1fcc2d97e",
+    "data\\raw\\design_census_frame.json": "5b289cd5535a8ce7c76cb8a85fc23f04495fa229559b16d176d6855c49c65107",
+    "data\\curated\\pop_batches\\concept_store_inputs.json": "3b89cc7384651c5ee98881e6ca57b97dcb6796258f02f9a31adf7e98e2b046ca",
+    "data\\curated\\concept_briefs.json": "92cb3be9b33cb5a651ed84e6d80e54146942eafc951c6bc781b5ef3c6bf7a4bf"
+  }
+}
