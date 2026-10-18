@@ -59,10 +59,10 @@ figure.sketch img { display: block; width: 100%; height: auto; border-radius: 4p
 .btn { font: inherit; font-size: 0.85rem; border: 1px solid var(--grid-strong); background: var(--panel); color: var(--ink); border-radius: var(--radius); padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-block; }
 .btn:hover { border-color: var(--ink2); }
 .btn.active { background: var(--ink); color: var(--panel); border-color: var(--ink); }
-.badge-clear-good { background: #e6f7f0; color: #0d6e4b; font-size: 0.78rem; padding: 2px 8px; border-radius: 4px; font-weight: 600; display: inline-block; white-space: nowrap; }
-.badge-good { background: #f0fdf4; color: #166534; font-size: 0.78rem; padding: 2px 8px; border-radius: 4px; font-weight: 500; display: inline-block; white-space: nowrap; }
-.badge-bad { background: #fff1f2; color: #9f1239; font-size: 0.78rem; padding: 2px 8px; border-radius: 4px; font-weight: 500; display: inline-block; white-space: nowrap; }
-.badge-clear-bad { background: #fdeeee; color: #a82020; font-size: 0.78rem; padding: 2px 8px; border-radius: 4px; font-weight: 600; display: inline-block; white-space: nowrap; }
+.badge-good { background: #e6f7f0; color: #0d6e4b; font-size: 0.78rem; padding: 2px 8px; border-radius: 4px; font-weight: 600; display: inline-block; white-space: nowrap; }
+.badge-warn { background: #fef3c7; color: #92400e; font-size: 0.78rem; padding: 2px 8px; border-radius: 4px; font-weight: 600; display: inline-block; white-space: nowrap; }
+.badge-bad { background: #fee2e2; color: #991b1b; font-size: 0.78rem; padding: 2px 8px; border-radius: 4px; font-weight: 600; display: inline-block; white-space: nowrap; }
+.badge-fade { background: #f1f5f9; color: #475569; font-size: 0.78rem; padding: 2px 8px; border-radius: 4px; font-weight: 600; display: inline-block; white-space: nowrap; }
 .controls { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin: 10px 0; font-size: 0.88rem; }
 input[type="search"] { font: inherit; font-size: 0.88rem; color: var(--ink); background: var(--panel); border: 1px solid var(--grid-strong); border-radius: var(--radius); padding: 6px 8px; width: 220px; max-width: 100%; }
 textarea#csv-fallback { width: 100%; height: 120px; font-size: 0.75rem; margin-top: 8px; }
@@ -228,39 +228,25 @@ figure.diagram img { display: block; width: 100%; height: auto; border-radius: 4
 </section>
 
 <section aria-labelledby="patterns">
-<h2 id="patterns">3. What's crowded and what pays off</h2>
-<p>Next, we checked which Steam tags are filling up and which ones help a game reach 500 reviews. The clearest sweet spots are female protagonists, anime styles, dark fantasy and horror: They help and aren't getting more common. Souls-likes, RPGs, roguelites and combat-heavy games help too, but more games are using them, while PvE, nonlinear and hack-and-slash games are crowding in without the payoff. Exploration and atmosphere, which our deep-sea idea leans on, are getting more common without clearly helping.</p>
+<h2 id="patterns">3. Steam tag rankings and crowding: what helps and what hurts</h2>
+<p>Rather than forecasting arbitrary hit odds for unreleased games by guessing store tags, the reliable empirical signal from the 1,245-game census is looking directly at how individual Steam tags perform and whether they are crowding in. In our validated model, advertised design features (story themes, mechanics, setting) added zero additional predictive weight once Steam tags and price/age controls were included (weights: 0% design, 60% tags, 40% controls). Because model predictions for hypothetical pitches are driven entirely by guessed tags, any score can be artificially inflated or depressed simply by picking different tags that "kinda fit."</p>
+
+<p>Furthermore, niche themes like <b>Underwater</b> (only 5 games across all of Steam in 2021–2026 meeting criteria, with 1 hit: <i>Pronty</i>) are too rare to model reliably—they require at least 25 games to receive a coefficient. Below, all 56 tags with enough data to measure are plotted and ranked across two dimensions: how fast they are crowding in (growth in share of new releases from 2021–23 to 2024–26) against how much they change the odds of reaching 500 reviews compared to a similar game without the tag.</p>
+
 <figure>
   <div id="fig-crowding" class="chart"></div>
   <div class="legend" id="crowd-legend"></div>
-  <figcaption>Each dot is a Steam tag that 25+ of these games share. Across: how much its share of new releases grew from 2021–23 to 2024–26. Up: how much it changes the odds of reaching 500 reviews. Green tags are the sweet spot: They help and aren't crowded yet. Orange ones help but are filling up, red ones are filling up without helping, and grey ones are fading. Hover a dot for details.</figcaption>
+  <figcaption>Each dot is a Steam tag that 25+ games share. <b>Horizontal axis:</b> Growth in share of new releases from 2021–23 to 2024–26 (how fast the tag is crowding in). <b>Vertical axis:</b> Odds multiplier for reaching 500 reviews. Green tags are the sweet spot (they help and aren't crowded yet), orange tags help but are filling up, red tags are filling up without helping, and grey tags are fading. Hover any dot for details, or click a dot to search for it in the table below.</figcaption>
 </figure>
-<p>Only a handful of tags have a clear effect on their own:</p>
-<figure>
-  <div id="fig-tag-odds" class="chart"></div>
-  <figcaption>How each tag changes the odds of reaching 500 reviews, compared with a similar game (same price band and time on sale) without it. Only tags with a clear effect are shown (their 90% range stays on one side of 1x): <span id="n-clear"></span> of the <span data-pop="n_tags"></span> tags that 25+ games share. Green helps, red hurts.</figcaption>
-</figure>
-<h3 id="design-space">Where the games sit</h3>
-<figure>
-  <div id="fig-map" class="chart"></div>
-  <div class="legend" id="map-legend"></div>
-  <figcaption>Every game in the study, placed so that games with similar top tags sit close together. Position isn't a ranking. Blue games reached 500 reviews, bigger dots have more reviews, and faint ones have been out for less than a year. Diamonds are our ideas, placed by the tags we expect them to get. Hover or focus a point for details.</figcaption>
-</figure>
-</section>
-
-<section aria-labelledby="compare">
-<h2 id="compare">4. Steam tag rankings: what helps and what hurts</h2>
-<p>Rather than forecasting arbitrary hit odds for unreleased games by guessing store tags, the reliable empirical signal from the 1,245-game census is looking directly at how individual Steam tags perform. In our validated model, advertised design features (story themes, mechanics, setting) added zero additional predictive weight once Steam tags and price/age controls were included (weights: 0% design, 60% tags, 40% controls). Because model predictions for hypothetical pitches are driven entirely by guessed tags, any score can be artificially inflated or depressed simply by picking different tags that "kinda fit."</p>
-
-<p>Furthermore, niche themes like <b>Underwater</b> (only 5 games across all of Steam in 2021–2026 meeting criteria, with 1 hit: <i>Pronty</i>) are too rare to model reliably—they require at least 25 games to receive a coefficient. Below is the complete ranking of all 56 tags with enough data to measure, ordered by how they change the odds of reaching 500 reviews compared to a similar game without the tag.</p>
 
 <div class="controls" style="margin-bottom: 12px;">
   <input type="search" id="tag-search" placeholder="Search tags (e.g. Platformer, Dark Fantasy)..." aria-label="Search Steam tags">
   <div style="display: flex; gap: 6px; flex-wrap: wrap;" id="tag-filters">
     <button class="btn active" data-filter="all">All (56)</button>
-    <button class="btn" data-filter="clear">Clear effect (12)</button>
-    <button class="btn" data-filter="pos">Advantage (27)</button>
-    <button class="btn" data-filter="neg">Drag (29)</button>
+    <button class="btn" data-filter="good"><span class="swatch" style="background:var(--good); width:8px; height:8px; display:inline-block; vertical-align:middle; margin-right:4px;"></span>Helps, not crowded (14)</button>
+    <button class="btn" data-filter="warn"><span class="swatch" style="background:var(--warn); width:8px; height:8px; display:inline-block; vertical-align:middle; margin-right:4px;"></span>Helps, crowding in (13)</button>
+    <button class="btn" data-filter="bad"><span class="swatch" style="background:var(--bad); width:8px; height:8px; display:inline-block; vertical-align:middle; margin-right:4px;"></span>Crowding, doesn't help (14)</button>
+    <button class="btn" data-filter="fade"><span class="swatch" style="background:var(--fade); width:8px; height:8px; display:inline-block; vertical-align:middle; margin-right:4px;"></span>Fading (15)</button>
   </div>
 </div>
 
@@ -269,7 +255,7 @@ figure.diagram img { display: block; width: 100%; height: auto; border-radius: 4
     <!-- Populated by JS -->
   </table>
 </div>
-<p class="small muted" style="margin-top: 8px;">Baseline: In the $10–19.99 band at 24 months, a typical game reaches 500 reviews about 17% of the time (12.3% across the entire population). Odds multipliers reflect held-out logistic regression coefficients with 90% bootstrap ranges from 200 resampled refits. Tags held by fewer than 25 games (like Underwater, n=5) are excluded from the model.</p>
+<p class="small muted" style="margin-top: 8px;">Baseline: In the $10–19.99 band at 24 months, a typical game reaches 500 reviews about 17% of the time (12.3% across the entire population). Odds multipliers reflect held-out logistic regression coefficients with 90% bootstrap ranges from 200 resampled refits. Release growth measures the change in new release share (2024–26 vs. 2021–23). Tags held by fewer than 25 games (like Underwater, n=5) are excluded from the model.</p>
 
 <h3>What this means for game developers</h3>
 <ul>
@@ -277,8 +263,10 @@ figure.diagram img { display: block; width: 100%; height: auto; border-radius: 4
   <li><b>Generic and casual tags create massive drag:</b> <i>Casual</i> (0.34x), <i>Hack and Slash</i> (0.55x), <i>Nonlinear</i> (0.58x), and <i>2D Platformer</i> (0.73x) are heavily penalized. This is not because 2D platforming is inherently flawed, but because it is a saturated dumping ground (487 games in training) where low-effort titles pool, driving down median visibility.</li>
   <li><b>The takeaway for the Deep-Sea Pitch:</b> Movement-first platformers naturally attract tags like <i>2D Platformer</i> and <i>Adventure</i>, which suffer from crowding drag. Meanwhile, <i>Underwater</i> represents completely open creative white-space: with only 5 games in the census, there is no evidence that players dislike underwater settings. If the game leans into atmospheric tension, challenging boss encounters, or tight kinetic traversal, positioning it around <i>Atmospheric</i>, <i>Precision Platformer</i>, or <i>Dark Fantasy</i> communicates its appeal much better than broad casual tags.</li>
 </ul>
+</section>
 
-<h3>The six other ideas</h3>
+<section aria-labelledby="compare">
+<h2 id="compare">4. Exploring the subgenre: six other creative concepts</h2>
 <p>Each concept explores a different gap identified in the 250-game design atlas, pairing themes and mechanics that rarely appear together:</p>
 <div class="scroll-x" tabindex="0" role="region" aria-label="Other game ideas"><table id="tbl-other-ideas" class="design-table">
   <thead><tr><th>Idea</th><th>What you do</th><th>Why it is interesting</th><th>Natural tag profile</th></tr></thead>
@@ -292,6 +280,13 @@ figure.diagram img { display: block; width: 100%; height: auto; border-radius: 4
   </tbody>
 </table></div>
 <p class="small"><b>Original pitch, shown for comparison:</b> descend the ocean dungeon with a cutlass, harpoon and trident to defeat the molten dragon and found a kingdom (carries <i>Hack and Slash</i>, which carries a 0.55x penalty due to heavy action crowding).</p>
+
+<h3 id="design-space">Where the games sit in the design space</h3>
+<figure>
+  <div id="fig-map" class="chart"></div>
+  <div class="legend" id="map-legend"></div>
+  <figcaption>Every game in the study, placed so that games with similar top tags sit close together. Position isn't a ranking. Blue games reached 500 reviews, bigger dots have more reviews, and faint ones have been out for less than a year. Diamonds are our ideas, placed by the tags we expect them to get. Hover or focus a point for details.</figcaption>
+</figure>
 </section>
 
 
@@ -401,7 +396,9 @@ function renderLadder() {
 /* 3a. Crowding vs. reward: growth in share of releases (2024-26 vs. 2021-23) against the tag's odds multiplier */
 const quad = t => t.odds >= 1 ? (t.growth < 1 ? "var(--good)" : "var(--warn)") : (t.growth < 1 ? "var(--fade)" : "var(--bad)");
 function renderCrowding() {
-  const host = $("#fig-crowding"), W = Math.max(300, host.clientWidth), narrow = W < 560, H = narrow ? 330 : 400, m = { l: 46, r: 14, t: 16, b: 44 };
+  const host = $("#fig-crowding");
+  if (!host) return;
+  const W = Math.max(300, host.clientWidth), narrow = W < 560, H = narrow ? 330 : 400, m = { l: 46, r: 14, t: 16, b: 44 };
   const svg = svgFor(host, W, H, "Steam tags plotted by how fast they are crowding in against how much they change the odds of reaching 500 reviews");
   const xl = Math.log10(0.35), xh = Math.log10(3), yl = Math.log10(0.25), yh = Math.log10(4);
   const X = v => m.l + (Math.log10(Math.max(0.35, Math.min(3, v))) - xl) / (xh - xl) * (W - m.l - m.r);
@@ -418,12 +415,12 @@ function renderCrowding() {
   const LABELS = new Set(narrow
     ? ["Female Protagonist", "Anime", "Souls-like", "Exploration", "PvE", "Casual", "Hack and Slash"]
     : ["Female Protagonist", "Anime", "Dark Fantasy", "Horror", "Souls-like", "RPG", "Exploration", "Atmospheric", "Metroidvania", "PvE", "Nonlinear", "Hack and Slash", "Casual", "3D", "Pixel Graphics", "Puzzle Platformer"]);
-  const placed = [];   // label boxes already drawn; each new label takes the first nearby spot that's free
+  const placed = [];
   const overlaps = b => placed.some(o => b.x < o.x + o.width && o.x < b.x + b.width && b.y < o.y + o.height && o.y < b.y + b.height);
   const spots = [[8, -7, "start"], [-8, -7, "end"], [8, 15, "start"], [-8, 15, "end"], [0, -11, "middle"], [0, 19, "middle"]];
   POP.crowding.slice().sort((a, b) => LABELS.has(a.tag) - LABELS.has(b.tag)).forEach(t => {
     const cx = X(t.growth), cy = Y(t.odds), on = LABELS.has(t.tag);
-    const d = sv("circle", { cx, cy, r: on ? 5.5 : 3.5, fill: quad(t), "fill-opacity": on ? 1 : 0.55, stroke: "var(--halo)", "stroke-width": 1.5, tabindex: on ? 0 : -1 }, svg);
+    const d = sv("circle", { cx, cy, r: on ? 5.5 : 3.5, fill: quad(t), "fill-opacity": on ? 1 : 0.55, stroke: "var(--halo)", "stroke-width": 1.5, tabindex: on ? 0 : -1, style: "cursor:pointer" }, svg);
     if (on) {
       const label = txt(svg, cx, cy, t.tag, { "font-size": 11, fill: "var(--ink)", stroke: "var(--halo)", "stroke-width": 3, "paint-order": "stroke" });
       const order = cx > W * 0.72 ? [spots[1], spots[0], ...spots.slice(2)] : spots;
@@ -433,35 +430,35 @@ function renderCrowding() {
       }
       placed.push(label.getBBox());
     }
-    hover(d, `<b>${esc(t.tag)}</b><br>${t.odds.toFixed(2)}x the odds of 500+ reviews (90% range ${t.lo.toFixed(2)}x to ${t.hi.toFixed(2)}x)<br>Share of new releases: ${pct(t.share_early, 1)} in 2021–23, ${pct(t.share_late, 1)} in 2024–26`);
+    d.addEventListener("click", () => {
+      const inp = $("#tag-search");
+      if (inp) {
+        inp.value = t.tag;
+        TAG_TBL.q = t.tag;
+        TAG_TBL.filter = "all";
+        const fContainer = $("#tag-filters");
+        if (fContainer) {
+          fContainer.querySelectorAll("button").forEach(b => b.classList.toggle("active", b.dataset.filter === "all"));
+        }
+        renderTagRankingsTable();
+        const tbl = $("#tbl-tag-rankings");
+        if (tbl) tbl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    });
+    hover(d, `<b>${esc(t.tag)}</b><br>${t.odds.toFixed(2)}x the odds of 500+ reviews (90% range ${t.lo.toFixed(2)}x to ${t.hi.toFixed(2)}x)<br>Share of new releases: ${pct(t.share_early, 1)} in 2021–23, ${pct(t.share_late, 1)} in 2024–26<br><i>Click to search in table below</i>`);
   });
 }
-$("#crowd-legend").innerHTML = [["var(--good)", "Helps, not crowded yet"], ["var(--warn)", "Helps, crowding in"], ["var(--bad)", "Crowding, doesn't help"], ["var(--fade)", "Fading"]]
-  .map(([c, label]) => `<span class="key"><span class="swatch" style="background:${c}"></span>${label}</span>`).join("");
-
-/* 3b. Tags with a clear effect */
-function renderTagOdds() {
-  const host = $("#fig-tag-odds"), W = Math.max(300, host.clientWidth), narrow = W < 520;
-  const shown = POP.tag_effects.filter(e => e.lo > 1 || e.hi < 1).sort((a, b) => b.odds - a.odds), n = shown.filter(e => e.lo > 1).length;
-  $("#n-clear").textContent = shown.length;
-  const rowH = 24, m = { l: narrow ? 118 : 150, r: 18, t: 8, b: 34 }, gap = 14, H = m.t + m.b + shown.length * rowH + gap;
-  const svg = svgFor(host, W, H, "Tags with a clear effect on the odds of reaching 500 reviews");
-  const lo = Math.log(0.2), hi = Math.log(6);
-  const X = v => m.l + (Math.log(Math.max(0.2, Math.min(6, v))) - lo) / (hi - lo) * (W - m.l - m.r);
-  [0.25, 0.5, 1, 2, 4].forEach(v => { sv("line", { x1: X(v), x2: X(v), y1: m.t, y2: H - m.b, stroke: v === 1 ? "var(--grid-strong)" : "var(--grid)" }, svg); txt(svg, X(v), H - m.b + 15, v + "x", { "text-anchor": "middle", "font-size": 11, fill: "var(--muted)" }); });
-  txt(svg, (m.l + W - m.r) / 2, H - 4, narrow ? "Odds of reaching 500 reviews" : "Odds of reaching 500 reviews, compared with a similar game without the tag", { "text-anchor": "middle", "font-size": 11, fill: "var(--ink2)" });
-  shown.forEach((e, i) => {
-    const y = m.t + i * rowH + (i >= n ? gap : 0) + rowH / 2, c = e.lo > 1 ? "var(--good)" : "var(--bad)";
-    txt(svg, m.l - 10, y + 4, e.tag, { "text-anchor": "end", "font-size": 12, fill: "var(--ink)" });
-    sv("line", { x1: X(e.lo), x2: X(e.hi), y1: y, y2: y, stroke: c, "stroke-width": 3, "stroke-linecap": "round", "stroke-opacity": 0.45 }, svg);
-    const d = sv("circle", { cx: X(e.odds), cy: y, r: 5, fill: c, stroke: "var(--halo)", "stroke-width": 1.5, tabindex: 0 }, svg);
-    hover(d, `<b>${esc(e.tag)}</b><br>${e.odds.toFixed(2)}x the odds (90% range ${e.lo.toFixed(2)}x to ${e.hi.toFixed(2)}x)<br>${e.n} games; ${pct(e.rate_with)} of them reached 500+ reviews`);
-  });
+const crowdLegend = $("#crowd-legend");
+if (crowdLegend) {
+  crowdLegend.innerHTML = [["var(--good)", "Helps, not crowded yet"], ["var(--warn)", "Helps, crowding in"], ["var(--bad)", "Crowding, doesn't help"], ["var(--fade)", "Fading"]]
+    .map(([c, label]) => `<span class="key"><span class="swatch" style="background:${c}"></span>${label}</span>`).join("");
 }
 
-/* 3c. Map of every game by tag similarity, with our ideas */
+/* 4. Map of every game by tag similarity, with our ideas */
 function renderMap() {
-  const host = $("#fig-map"), W = Math.max(300, host.clientWidth), narrow = W < 560, H = narrow ? 380 : 520, pad = 18;
+  const host = $("#fig-map");
+  if (!host) return;
+  const W = Math.max(300, host.clientWidth), narrow = W < 560, H = narrow ? 380 : 520, pad = 18;
   const svg = svgFor(host, W, H, "Every game in the study placed by tag similarity, with our ideas as diamonds");
   const pts = POP.games.filter(g => g.x != null), all = pts.concat(POP.ideas);
   const xs = all.map(p => p.x), ys = all.map(p => p.y);
@@ -480,18 +477,24 @@ function renderMap() {
     hover(d, `<b>${esc(ideaName(i))}</b><br>Expected tags: ${esc(i.tags.concat(i.unmodelled).join(", "))}`);
   });
 }
-$("#map-legend").innerHTML = `<span class="key"><span class="swatch" style="background:var(--s1)"></span>Reached 500 reviews</span><span class="key"><span class="swatch" style="background:var(--dot)"></span>Didn't</span><span class="key"><svg width="14" height="14" aria-hidden="true"><path d="M7 1L13 7L7 13L1 7Z" fill="var(--hl)"/></svg>Deep-sea idea</span><span class="key"><svg width="14" height="14" aria-hidden="true"><path d="M7 1L13 7L7 13L1 7Z" fill="var(--s2)"/></svg>Other ideas</span><span class="key"><svg width="14" height="14" aria-hidden="true"><path d="M7 1L13 7L7 13L1 7Z" fill="var(--panel)" stroke="var(--s2)" stroke-width="2"/></svg>Original pitch</span>`;
+const mapLegend = $("#map-legend");
+if (mapLegend) {
+  mapLegend.innerHTML = `<span class="key"><span class="swatch" style="background:var(--s1)"></span>Reached 500 reviews</span><span class="key"><span class="swatch" style="background:var(--dot)"></span>Didn't</span><span class="key"><svg width="14" height="14" aria-hidden="true"><path d="M7 1L13 7L7 13L1 7Z" fill="var(--hl)"/></svg>Deep-sea idea</span><span class="key"><svg width="14" height="14" aria-hidden="true"><path d="M7 1L13 7L7 13L1 7Z" fill="var(--s2)"/></svg>Other ideas</span><span class="key"><svg width="14" height="14" aria-hidden="true"><path d="M7 1L13 7L7 13L1 7Z" fill="var(--panel)" stroke="var(--s2)" stroke-width="2"/></svg>Original pitch</span>`;
+}
 
-/* 4. Complete Steam tag rankings table */
+/* 3b. Complete Steam tag rankings and market dynamics table */
 const TAG_TBL = { sort: "odds", dir: -1, q: "", filter: "all" };
 const TAG_COLS = [
   ["rank", "#", true],
   ["tag", "Steam Tag", false],
   ["odds", "Odds Multiplier (90% range)", true],
+  ["growth", "Release Growth", true],
   ["n", "Games", true],
   ["rate_with", "500+ Rate", true],
-  ["status", "Effect", false]
+  ["status", "Market Effect", false]
 ];
+
+const crowdMap = new Map((POP.crowding || []).map(c => [c.tag, c]));
 
 function renderTagRankingsTable() {
   const host = $("#tbl-tag-rankings");
@@ -499,20 +502,36 @@ function renderTagRankingsTable() {
   const q = TAG_TBL.q.trim().toLowerCase();
 
   let rows = POP.tag_effects.map(t => {
-    const isClearGood = t.lo > 1.0;
-    const isClearBad = t.hi < 1.0;
-    const isGood = t.odds >= 1.0;
-    const status = isClearGood ? "Clear advantage" : isClearBad ? "Clear drag" : isGood ? "Advantage" : "Drag";
-    const statusClass = isClearGood ? "badge-clear-good" : isClearBad ? "badge-clear-bad" : isGood ? "badge-good" : "badge-bad";
-    return { ...t, isClearGood, isClearBad, isGood, status, statusClass };
+    const c = crowdMap.get(t.tag) || {};
+    const growth = c.growth != null ? c.growth : 1.0;
+    let quadKey, status, statusClass;
+    if (t.odds >= 1.0) {
+      if (growth < 1.0) {
+        quadKey = "good";
+        status = "Helps, not crowded yet";
+        statusClass = "badge-good";
+      } else {
+        quadKey = "warn";
+        status = "Helps, crowding in";
+        statusClass = "badge-warn";
+      }
+    } else {
+      if (growth < 1.0) {
+        quadKey = "fade";
+        status = "Fading";
+        statusClass = "badge-fade";
+      } else {
+        quadKey = "bad";
+        status = "Crowding, doesn't help";
+        statusClass = "badge-bad";
+      }
+    }
+    const isClear = t.lo > 1.0 || t.hi < 1.0;
+    return { ...t, growth, quadKey, status, statusClass, isClear };
   });
 
-  if (TAG_TBL.filter === "clear") {
-    rows = rows.filter(t => t.isClearGood || t.isClearBad);
-  } else if (TAG_TBL.filter === "pos") {
-    rows = rows.filter(t => t.isGood);
-  } else if (TAG_TBL.filter === "neg") {
-    rows = rows.filter(t => !t.isGood);
+  if (TAG_TBL.filter !== "all") {
+    rows = rows.filter(t => t.quadKey === TAG_TBL.filter);
   }
 
   if (q) {
@@ -522,7 +541,7 @@ function renderTagRankingsTable() {
   const key = TAG_TBL.sort;
   rows.sort((a, b) => {
     let va = a[key], vb = b[key];
-    if (key === "tag") return TAG_TBL.dir * va.localeCompare(vb);
+    if (key === "tag" || key === "status") return TAG_TBL.dir * va.localeCompare(vb);
     if (key === "rank") return TAG_TBL.dir * (POP.tag_effects.indexOf(a) - POP.tag_effects.indexOf(b));
     return TAG_TBL.dir * (va - vb);
   });
@@ -530,16 +549,19 @@ function renderTagRankingsTable() {
   host.innerHTML = `<thead><tr>${TAG_COLS.map(([k, label, num]) => `<th class="${num ? "num" : ""}"><button data-tag-sort="${k}">${label}${TAG_TBL.sort === k ? (TAG_TBL.dir > 0 ? " ↑" : " ↓") : ""}</button></th>`).join("")}</tr></thead><tbody>` +
     (rows.length ? rows.map(t => {
       const origRank = POP.tag_effects.findIndex(x => x.tag === t.tag) + 1;
-      const oddsColor = t.isClearGood ? "var(--good)" : t.isClearBad ? "var(--bad)" : (t.odds >= 1 ? "var(--ink)" : "var(--muted)");
+      const oddsColor = t.isClear ? (t.odds >= 1 ? "var(--good)" : "var(--bad)") : "var(--ink)";
+      const growthPct = Math.round((t.growth - 1) * 100);
+      const growthStr = `${t.growth.toFixed(2)}x <span class="muted" style="font-size:0.82rem;">(${growthPct >= 0 ? "+" : ""}${growthPct}%)</span>`;
       return `<tr>` +
         `<td class="num">${origRank}</td>` +
         `<td><b>${esc(t.tag)}</b></td>` +
         `<td class="num" style="color:${oddsColor}; font-weight:600;">${t.odds.toFixed(2)}x <span class="muted" style="font-weight:400; font-size:0.82rem;">[${t.lo.toFixed(2)}–${t.hi.toFixed(2)}]</span></td>` +
+        `<td class="num">${growthStr}</td>` +
         `<td class="num">${t.n}</td>` +
         `<td class="num">${pct(t.rate_with, 1)}</td>` +
         `<td><span class="${t.statusClass}">${t.status}</span></td>` +
         `</tr>`;
-    }).join("") : '<tr><td colspan="6">No tags match that search.</td></tr>') + "</tbody>";
+    }).join("") : '<tr><td colspan="7">No tags match that search.</td></tr>') + "</tbody>";
 }
 
 const tagTable = $("#tbl-tag-rankings");
@@ -548,7 +570,7 @@ if (tagTable) {
     const b = e.target.closest("button[data-tag-sort]");
     if (!b) return;
     const k = b.dataset.tagSort;
-    TAG_TBL.dir = TAG_TBL.sort === k ? -TAG_TBL.dir : (["odds", "n", "rate_with"].includes(k) ? -1 : 1);
+    TAG_TBL.dir = TAG_TBL.sort === k ? -TAG_TBL.dir : (["odds", "growth", "n", "rate_with"].includes(k) ? -1 : 1);
     TAG_TBL.sort = k;
     renderTagRankingsTable();
   });
@@ -592,7 +614,7 @@ $("#tbl-search").addEventListener("input", e => { TBL.q = e.target.value; render
 $("#tbl-more").addEventListener("click", () => { TBL.all = true; renderGames(); });
 renderGames();
 
-function renderAll() { renderLadder(); renderCrowding(); renderTagOdds(); renderMap(); renderTagRankingsTable(); }
+function renderAll() { renderLadder(); renderCrowding(); renderTagRankingsTable(); renderMap(); }
 renderAll();
 let resizeTimer, lastW = window.innerWidth;
 window.addEventListener("resize", () => {
