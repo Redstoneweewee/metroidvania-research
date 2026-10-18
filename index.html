@@ -82,7 +82,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 <h2 id="pitch">1. The lead idea: a deep-sea heat metroidvania</h2>
 <div class="callout">
   <p class="tagline">Descend through sunken kingdoms, drawing power from the same heat that threatens your life.</p>
-  <p>A diver explores four underwater levels, moving through the remains of a drowned kingdom toward a molten dragon. Heat powers the suit and its lure, so the vents that help you see and fight can also burn you. Because heat rises, the diver floats upward unless their boots are planted on a floor, so every step deeper is a choice. Enemies attack each other as well as the player; much of combat comes from leading them into each other's paths.</p>
+  <p>A diver explores four underwater levels, moving through the remains of a drowned kingdom toward a molten dragon. Heat powers the suit and its lure, so the vents that help you see and fight can also burn you. Because heat rises, the diver floats upward unless their boots grip a floor or their hands grip a ceiling handhold, so every step deeper is a choice. Enemies attack each other as well as the player; much of combat comes from leading them into each other's paths.</p>
 </div>
 
 <div class="pitch-top">
@@ -98,7 +98,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 </div>
 
 <h3 id="floating">Floating upward</h3>
-<p>The diver floats upward unless grounded. Specialized boots grip any floor you land on, so you can walk the seabed; kick off or step past an edge and you start to rise. Going deeper takes effort, while going back up is free.</p>
+<p>The diver floats upward unless holding on. Specialized boots grip any floor you land on, so you can walk the seabed. Your hands grab handholds on ceilings, such as chains, pipes, ship ribs and roots, and you can crawl along them at walking speed. Kick off a floor or ceiling, or step past an edge, and you start to move freely again. Going deeper takes effort, while going back up is free.</p>
+<p>You can only hold onto what pushes back. The boots clamp you to floors, and your own buoyancy presses you up into ceilings, so your hands only have to stop you sliding. Nothing presses you into a side wall, so touching one makes you slide upward along it. Bare stone ceilings offer nothing to grab, which keeps handholds to the places a level designer puts them.</p>
 <p>The reason is the heat itself. Warm things rise and cold things sink: the drowned kingdoms sank when they lost their heat, and a diver carrying heat has to push against the sea to follow them.</p>
 
 <h3 id="movement-combat">Passive and active movement</h3>
@@ -108,15 +109,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
   <tbody>
     <tr><td>Passive</td><td><b>Drift</b></td><td>Rise slowly while steering, with a small heat aura around the suit. It uses no heat.</td></tr>
     <tr><td>Passive</td><td><b>Float</b></td><td>Float straight up quickly and leave a vertical heat trail. It uses no heat, and deals more damage the farther you float.</td></tr>
-    <tr><td>Active</td><td><b>Kick</b></td><td>Give yourself a short downward impulse, with a burst of heat just above your head. It has a low heat cost and very little attack range. Along with vents, it is the only way to go deeper.</td></tr>
+    <tr><td>Active</td><td><b>Kick</b></td><td>Give yourself a short downward impulse, with a burst of heat just above your head. It has a low heat cost and very little attack range. Along with vents, it is the only way to go deeper. Kicking off a floor or ceiling pushes you away from it with a stronger initial boost.</td></tr>
     <tr><td>Active</td><td><b>Dash</b></td><td>Dash left or right and leave a horizontal heat trail. It spends more heat than a kick.</td></tr>
   </tbody>
 </table></div>
 <p>Heat trails last about 5–10 seconds. Overlapping trails refresh a capped burn rather than multiplying damage. Your own heat does not hurt you.</p>
-<p><b>Proposed keyboard controls:</b> WASD aims vent rebounds, A/D steers horizontally, Space kicks downward, Shift with A/D dashes, and holding W floats. Kicking or floating while grounded lifts you off the floor. When you stop floating and are not grounded, you return to a slow upward drift.</p>
+<p><b>Proposed keyboard controls:</b> WASD aims vent rebounds, A/D steers horizontally, Space kicks downward, Shift with A/D dashes, and holding W floats. Kicking or floating while grounded lifts you off the floor. Floating into a handhold grabs it automatically, A/D crawls along it, and Space pushes off downward with a boost. When you stop floating and are not grounded, you return to a slow upward drift.</p>
 
 <h3>Enemies fighting each other</h3>
-<p>Your movement attacks still deal damage, but mainly help you fend off creatures while you lead them toward one another. Getting enemies to fight is the main way to kill them, so where you move changes which creatures meet. A room with multiple enemies becomes something you can use, rather than just more things attacking you.</p>
+<p>Your movement attacks still deal damage, but mainly help you fend off creatures while you lead them toward one another. Getting enemies to fight is the main way to kill them, so where you move changes which creatures meet. A room with multiple enemies becomes something you can use, rather than just more things attacking you. Handholds also let you hang above a room and wait for creatures to fight before kicking down.</p>
 <p class="small"><b>Possible addition:</b> some enemies could fear heat and move away from an aura or trail. This is still an idea.</p>
 
 <h3 id="environmental-movement">Pull, bounce, push</h3>
@@ -145,7 +146,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 
 <h3 id="design-debate">Why the idea is interesting</h3>
 <p>Movement lets you travel and defend yourself together: A kick moves you away from a creature above while directing heat toward it. Floating makes depth something you earn: every step down is a choice, and running out of heat sends you back toward safety rather than trapping you. Vents turn refueling into another movement choice, and enemy hostility gives you a reason to think about where creatures will meet.</p>
-<p>A prototype needs to check whether enemies reliably fight each other, whether 5–10 seconds of trails keep the room readable, and whether floating feels like freedom rather than a fight with the controls.</p>
+<p>A prototype needs to check whether enemies reliably fight each other, whether 5–10 seconds of trails keep the room readable, whether floating feels like freedom rather than a fight with the controls, and whether handholds are easy to spot at speed.</p>
 <p><b>Current scope:</b> PC, keyboard or controller; 3–4 hours, about 70 rooms, eight enemy types and four bosses. Inked characters sit on painted backgrounds. Story mode halves environmental burns, keeps heat above a quarter and widens rebound timing. This scope still needs testing.</p>
 </section>
 
